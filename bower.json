@@ -1,0 +1,33 @@
+{
+  "name": "id3",
+  "version": "1.0.4",
+  "description": "Online demo for id3 classification process: http://id3.jijiyy.me",
+  "main": "app.js",
+  "authors": [
+    "http://jijiyy.me"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "k-means"
+  ],
+  "homepage": "http://id3.jijiyy.com",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "test",
+    "tests",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "angular": "^1.5.0",
+    "handsontable": "https://github.com/handsontable/handsontable.git#^0.25.0",
+    "angular-translate": "^2.11.0",
+    "angular-sanitize": "^1.5.6"
+  },
+  "resolutions": {
+    "handsontable": "^0.25.0"
+  }
+}

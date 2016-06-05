@@ -1,0 +1,8 @@
+form.ui.form(name="controlForm", ng-submit="id3()", ng-class="{'loading': computing}")
+    div.inline.field
+    div.field
+        button.ui.button(type="submit", ng-click="id3()") #{__('开始构建决策树')}
+
+    div
+        h5 #{__('数据:')}
+        div#data-table
