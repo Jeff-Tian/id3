@@ -113,6 +113,7 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
         $scope.stats.showSplitDetail = {};
         $scope.id3 = function () {
             var initialStats = $scope.stats;
+            $scope.stats.showSplitDetail = $scope.stats.showSplitDetail || {};
             $scope.stats.showSplitDetail[initialStats.maxGainAttr] = true;
 
             for (var c in initialStats.subCategories[initialStats.maxGainAttr]) {

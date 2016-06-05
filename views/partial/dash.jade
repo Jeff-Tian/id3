@@ -11,15 +11,15 @@ mixin dataDistribution(dist)
                 td {{#{dist}.sum}}
     p #{__('Entropy')}: {{#{dist}.entropy}}
 
-div.hard.auto-wrap.cmd
-    + dataDistribution('stats["决策"]')
+mixin stats(stats)
+    + dataDistribution(stats + '["决策"]')
     table.ui.selectable.inverted.table(ng-show="false")
         thead
             tr
                 th #{__('Attribute')}
                 th #{__('Range')}
         tbody
-            tr(ng-repeat="(attr, r) in stats.range")
+            tr(ng-repeat="(attr, r) in #{stats}.range")
                 td {{attr}}
                 td {{r}}
     table.ui.selectable.inverted.table(ng-show="false")
@@ -28,25 +28,28 @@ div.hard.auto-wrap.cmd
                 th #{__('Attribute')}
                 th #{__('Category')}
         tbody
-            tr(ng-repeat="(attr, c) in stats.categories")
+            tr(ng-repeat="(attr, c) in #{stats}.categories")
                 td {{attr}}
                 td {{c}}
-    table.ui.selectable.inverted.table(ng-repeat="(attr, r) in stats.range", ng-if="attr !== '决策'")
-        caption.ui.inverted.sub.header(style="cursor: pointer;", ng-click="stats.showSplitDetail[attr] = !stats.showSplitDetail[attr]", ng-class="{'red': stats.maxGainAttr === attr}") #{__('Split by')} {{attr}} (#{__('Gain')} = {{stats.subGains[attr]}})
-        thead(ng-show="stats.showSplitDetail[attr]")
+    table.ui.selectable.inverted.table(ng-repeat="(attr, r) in #{stats}.range", ng-if="attr !== '决策'")
+        caption.ui.inverted.sub.header(style="cursor: pointer;", ng-click="#{stats}.showSplitDetail[attr] = !#{stats}.showSplitDetail[attr]", ng-class="{'red': stats.maxGainAttr === attr}") #{__('Split by')} {{attr}} (#{__('Gain')} = {{stats.subGains[attr]}})
+        thead(ng-show="#{stats}.showSplitDetail[attr]")
             tr
                 th ~
                 th #{__('数据拆分分布')}
-        tbody(ng-show="stats.showSplitDetail[attr]")
-            tr(ng-repeat="(range, distribute) in stats.subCategories[attr]")
+        tbody(ng-show="#{stats}.showSplitDetail[attr]")
+            tr(ng-repeat="(range, distribute) in #{stats}.subCategories[attr]")
                 td
                     p {{range}}
                 td
                     + dataDistribution('distribute')
-        tfoot(ng-show="stats.showSplitDetail[attr]")
+        tfoot(ng-show="#{stats}.showSplitDetail[attr]")
             tr
                 th  #{__('Gain')}
                 th {{stats.subGains[attr]}}
+
+div.hard.auto-wrap.cmd
+    + stats('stats')
 
 h5 &nbsp;#{__('')}
 div.hard.auto-wrap.cmd
