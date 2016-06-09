@@ -127,11 +127,35 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
             $scope.stats.showSplitDetail = $scope.stats.showSplitDetail || {};
             $scope.stats.showSplitDetail[initialStats.maxGainAttr] = true;
 
-            for (var c in initialStats.subCategories[initialStats.maxGainAttr]) {
-                var data = initialStats.subCategories[initialStats.maxGainAttr][c].rawData;
-                var dataStats = getDataStats(data);
-                console.log(dataStats);
-                initialStats.subCategories[initialStats.maxGainAttr][c].stats = dataStats;
+            var statsQueue = [initialStats];
+
+            var loops = 0;
+            while (statsQueue.length && loops < 100) {
+                loops++;
+
+                var theStats = statsQueue.shift();
+
+                if (theStats['决策'].entropy <= 0) {
+                    console.log('skip ', theStats);
+                    continue;
+                }
+
+                for (var c in theStats.subCategories[theStats.maxGainAttr]) {
+                    var s = theStats.subCategories[theStats.maxGainAttr][c];
+
+                    if (s.entropy <= 0) {
+                        continue;
+                    }
+
+                    var data = s.rawData;
+
+                    var dataStats = getDataStats(data);
+                    s.stats = dataStats;
+                    
+                    if (dataStats['决策'].entropy > 0) {
+                        statsQueue.push(dataStats);
+                    }
+                }
             }
         };
 
