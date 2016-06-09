@@ -47,7 +47,7 @@ gulp.task('release', function (done) {
 });
 
 gulp.task('default', function (done) {
-    return runSequence('clean', 'mocha', 'test', 'start', done);
+    return runSequence('clean', 'mocha', 'test', 'jadeTemplate', 'start', done);
 });
 
 gulp.task('replace', function (done) {
@@ -64,7 +64,7 @@ gulp.task('replace', function (done) {
 
 
 gulp.task('clean', function (done) {
-    return gulp.src('dist', {read: false})
+    return gulp.src(['dist', 'public/templates'], {read: false})
         .pipe(clean())
         ;
 });
@@ -89,22 +89,36 @@ gulp.task('uglify-css', function (done) {
         ;
 });
 
-
-gulp.task('jade', function (done) {
+gulp.task('jadeTemplate', function (done) {
     var jadeFiles = [{
-        src: './views/index.jade',
-        dest: './public/'
+        src: './views/templates/stats.jade',
+        dest: './public/templates/'
     }];
 
+    return runJade(jadeFiles, done);
+});
+
+function runJade(jadeFiles, done) {
     return jadeFiles.forEach(function (jf) {
         if (!jf.src || !jf.dest) return done();
 
         gulp.src(jf.src)
             .pipe(jade())
-            .pipe(gulp.dest(jf.dest))
+            .pipe(gulp.dest(jf.dest));
 
         done();
     });
+}
+gulp.task('jade', function (done) {
+    var jadeFiles = [{
+        src: './views/index.jade',
+        dest: './public/'
+    }, {
+        src: './views/templates/stats.jade',
+        dest: './public/templates/'
+    }];
+
+    return runJade(jadeFiles, done);
 });
 
 gulp.task('build', function (done) {

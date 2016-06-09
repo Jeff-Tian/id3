@@ -35,6 +35,14 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
             return dfd.promise;
         };
     }])
+    .directive('tree', [function () {
+        return {
+            templateUrl: '/templates/stats.html',
+            link: function (scope, element, attrs) {
+                
+            }
+        };
+    }])
     .controller('ID3Ctrl', ['$scope', 'id3', '$filter', '$q', function ($scope, id3, $filter, $q) {
         $scope.testData =
             [
