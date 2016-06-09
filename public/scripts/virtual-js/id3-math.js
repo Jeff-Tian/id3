@@ -29,11 +29,19 @@
         return cols;
     }
 
-    function getAttributesRanges(data) {
+    function getAttributesRanges(data, theAttr) {
+        console.log('theAttr = ', theAttr);
         var cols = getCols(data);
         var ranges = {};
 
         for (var h in cols) {
+            if (h === theAttr) {
+                console.log('skipped same ', h);
+                continue;
+            } else {
+                console.log('----- ', h);
+            }
+
             if (cols[h] instanceof Array && typeof cols[h][0] === 'number') {
                 ranges[h] = [Math.min.apply(null, cols[h]), Math.max.apply(null, cols[h])];
             } else {

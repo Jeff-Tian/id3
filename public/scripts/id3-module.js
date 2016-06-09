@@ -79,7 +79,7 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
             stats['决策'].entropy = id3.entropy(stats['决策']);
         }
 
-        function getDataStats(data) {
+        function getDataStats(data, theAttr) {
             var stats = {
                 '决策': {
                     set: {}
@@ -88,7 +88,7 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
 
             distribute(data, stats);
 
-            stats.range = id3.getAttributesRanges(data);
+            stats.range = id3.getAttributesRanges(data, theAttr);
             stats.categories = id3.divideRanges(stats.range);
 
             stats.subCategories = {};
@@ -149,9 +149,9 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
 
                     var data = s.rawData;
 
-                    var dataStats = getDataStats(data);
+                    var dataStats = getDataStats(data, theStats.maxGainAttr);
                     s.stats = dataStats;
-                    
+
                     if (dataStats['决策'].entropy > 0) {
                         statsQueue.push(dataStats);
                     }
