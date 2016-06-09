@@ -1,8 +1,9 @@
-//include mixin
+include mixin
 
 div.hard.auto-wrap.cmd
-    //+ stats('stats')
-    tree
+    + dataDistribution('stats[\'决策\']')
+    + stats('stats')
+    //tree
 
 h5 &nbsp;#{__('')}
 div.hard.auto-wrap.cmd

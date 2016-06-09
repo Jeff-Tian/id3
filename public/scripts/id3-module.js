@@ -38,8 +38,11 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
     .directive('tree', [function () {
         return {
             templateUrl: '/templates/stats.html',
+            scope: {
+                stats: '='
+            },
             link: function (scope, element, attrs) {
-                
+
             }
         };
     }])
@@ -59,11 +62,11 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
                 {GMAT: 490, GPA: 4.00, 'GMAT 定量评分': 65, '决策': '?'}
             ];
 
-        function distribute(stats) {
+        function distribute(data, stats) {
             var total = 0;
-            for (var i = 0; i < $scope.testData.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 total++;
-                var row = $scope.testData[i];
+                var row = data[i];
                 if (typeof stats['决策']['set'][row['决策']] === 'undefined') {
                     stats['决策']['set'][row['决策']] = 0;
                 }
@@ -83,7 +86,7 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
                 }
             };
 
-            distribute(stats);
+            distribute(data, stats);
 
             stats.range = id3.getAttributesRanges(data);
             stats.categories = id3.divideRanges(stats.range);
@@ -97,7 +100,7 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
                     continue;
                 }
 
-                stats.subCategories[attr] = id3.subDivide($scope.testData, attr, stats.categories[attr]);
+                stats.subCategories[attr] = id3.subDivide(data, attr, stats.categories[attr]);
 
                 stats.subGains[attr] = id3.gain(stats['决策'], stats.subCategories[attr]);
 
@@ -126,7 +129,9 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
 
             for (var c in initialStats.subCategories[initialStats.maxGainAttr]) {
                 var data = initialStats.subCategories[initialStats.maxGainAttr][c].rawData;
-                c.stats = getDataStats(data);
+                var dataStats = getDataStats(data);
+                console.log(dataStats);
+                initialStats.subCategories[initialStats.maxGainAttr][c].stats = dataStats;
             }
         };
 
