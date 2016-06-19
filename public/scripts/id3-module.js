@@ -1,9 +1,7 @@
 angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelperModule', 'id3MathModule'])
     .config(['$translateProvider', 'localeHelperProvider', function ($translateProvider, localeHelperProvider) {
         $translateProvider.useLoader('translationLoader');
-        console.log('localeHelperProvider', localeHelperProvider);
         var locale = localeHelperProvider.getLocale(window.location.pathname);
-        console.log('locale = ', locale);
         $translateProvider.preferredLanguage(locale);
         $translateProvider.useSanitizeValueStrategy('escapeParameters');
     }])
