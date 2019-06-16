@@ -1,17 +1,17 @@
 sudo: false
 language: node_js
 node_js:
-  - '8'
-  - '10'
+- '8'
+- '10'
 install:
-  - npm i npminstall && npminstall
+- npm i npminstall && npminstall
 script:
-  - npm test && gulp heroku
+- npm test && gulp heroku
 after_script:
-  - npminstall codecov && codecov
+- npminstall codecov && codecov
 deploy:
   provider: heroku
   api_key:
-    secure: ltVu6NxV6u6XHCV3MiCnH9ZHJp3TjOMYWrIWuljPfF2WDq4ha/c6bIUwkj6X/SJSvu6n6oX0cQJ0pS6r2CFDH3hnHznXVQc+9K+zqO2FUPLlPH+MmJe4EX3nnmE5FblEr9Ov8H2wPiyJ12zIbnyl6tUsIwyMrD/YoRlykaJ7vB6UnmXap9TIT3pJuXqC7an1z08Kql9s9VsnOiRerhU8Swv/0147RG90YJVW//BaP53PcsPGF7C+u96GJWnVjvUyuIZRUxK6DBxPpZDvLs/do2wP+I1PMISOhfcSVHRoFIu16uTtByAuNbgagiamNYFdbqA7tntk/owS4PPOUrPjx80bySJhL3rl10J5WNt0fgVyN6JLORHfGUwjp8kFNXiuzQHPqjVr4Xdi6PkMONhbg5WSdXZX5+QgBUxc27CWKxikTXuo9sJEJRT8TejuypE+Sb8aW22vb8H0tikRv6CwkzIaMATqjC7/+LUDS44Y5xcbkSSXkTQ99MLI8d1Ll9rwo/Y2kISSqiEfiDBF8tHqnAXg6ZxzUXAsp6Bd71ndj+gfbCJGHegUuMhK0ar8RZ9vlS5RuCT+FydTDaEUEEeotmLLmDF+MY3ltIem5t+AdfyxmIMvhONWcbov5x+H1O0DVMJWR+H6C4KFQ9ERJTTpYPPeV4x0XgBMbQ7FX8Wptgc=
+    secure: YnwVOgTdO2a7J4pzhV+2HjEe8qxosd9ZbBtcveRIWX2ce1UPzH7EeQQmwCjl0B+KuqjWVvsJbqb2xEOBjdnDEOX5eHWy0Jm8bxgG6e8seGOI9fAJjHIHjXD4tv7ZuLaFFRkaJvd2Q5rmcgsU23/S28zbyyHWWfDg9o9zYvQbac/j4NUIGoWt4dVd8mEvDs9BsS2uWyhLq7Y5ZvpOdo6pCeEp9xrG9HZ5OTPjUimQ6P2xncl0Ps6K1ODiEbZbbh0j/+QGLXZljDr7ZMuW6R3JvNqXgJHP++coQb0Y4wd9uXavNc2fLrsPp8xpewRodaJ/JYWvHIOFH0IKJHLCfw23RzgJcjheYQEnvi76FGNyYRWl0bEk2GsGrgGgMszK3406DaWGRm0zL0I/zzvAwEvZ3oMg+DnfWinCNPHxadhrV2/09iOwgTau1NWj0NTP6Q724kO4TXvRCtgUzwZM6bXT8wwHM8JnWCshZVQCJv+R2tWc8l6NUUckKCM8iiDNqDAWVD9ZwvJ+ewYtJvml+Ft0jDMSi98EVU0ehCzp5MG3gXUp7OKnf2D29VcwBA1A306f0aDSUdgkB5gmsRB42gOHAD1aBBYbBvwnbjcPdF6/7aMdNaZ/aDi2p8E88mVOreYj9PfuNlGdo/UKhwdzD+aeQriB04x/PCC0NGtFdA8uBcw=
   app: id3-demo
   skip_cleanup: true
