@@ -8,8 +8,10 @@ bower install
 gulp
 ```
 
+Open browser and navigate to: http://localhost:60005/
+
 # Screen shot:
-![k-means screen shot](./assets/screenshot.png)
+![id3 screen shot](./assets/screenshot.png)
 
 
 # CI Server:

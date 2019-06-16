@@ -17,7 +17,7 @@ gulp.task('jshint', function () {
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'))
-    ;
+        ;
 });
 
 gulp.task('mocha', function (done) {
@@ -39,7 +39,7 @@ gulp.task('bump', function () {
     gulp.src(['./package.json', './bower.json'])
         .pipe(bump())
         .pipe(gulp.dest('./'))
-    ;
+        ;
 });
 
 gulp.task('release', function (done) {
@@ -50,21 +50,25 @@ gulp.task('default', function (done) {
     return runSequence('clean', 'mocha', 'test', 'jadeTemplate', 'start', done);
 });
 
+gulp.task('heroku', function (done) {
+    return runSequence('clean', 'jadeTemplate', 'copy', 'uglify-js', 'uglify-css', done);
+})
+
 gulp.task('replace', function (done) {
     var replace = require('gulp-replace');
 
     gulp.src(['public/semantic/dist/semantic.min.css'])
-    //.pipe(replace(/https:\/\/fonts.googleapis.com\/css/g, 'http://fonts.useso.com/css'))
+        //.pipe(replace(/https:\/\/fonts.googleapis.com\/css/g, 'http://fonts.useso.com/css'))
         .pipe(replace(/https:\/\/fonts.googleapis.com\/css/g, ''))
         .pipe(gulp.dest('public/semantic/dist/'))
-    ;
+        ;
 
     done();
 });
 
 
 gulp.task('clean', function (done) {
-    return gulp.src(['dist', 'public/templates'], {read: false})
+    return gulp.src(['dist', 'public/templates'], { read: false })
         .pipe(clean())
         ;
 });

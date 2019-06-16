@@ -22,13 +22,15 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
                 method: 'GET',
                 url: '/locales/' + options.key + '.json'
             })
-                .success(function (result) {
-                    dfd.resolve(result);
+                .then(
+                    function (result) {
+                        dfd.resolve(result);
 
-                    console.log('localeResource:load');
-                    $rootScope.$emit('localeResource:load');
-                })
-                .error(dfd.reject);
+                        console.log('localeResource:load');
+                        $rootScope.$emit('localeResource:load');
+                    },
+                    dfd.reject
+                );
 
             return dfd.promise;
         };
@@ -47,17 +49,17 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
     .controller('ID3Ctrl', ['$scope', 'id3', '$filter', '$q', function ($scope, id3, $filter, $q) {
         $scope.testData =
             [
-                {GMAT: 650, GPA: 2.75, 'GMAT 定量评分': 35, '决策': 'No'},
-                {GMAT: 580, GPA: 3.50, 'GMAT 定量评分': 70, '决策': 'No'},
-                {GMAT: 600, GPA: 3.50, 'GMAT 定量评分': 75, '决策': 'Yes'},
-                {GMAT: 450, GPA: 2.95, 'GMAT 定量评分': 80, '决策': 'No'},
-                {GMAT: 700, GPA: 3.25, 'GMAT 定量评分': 90, '决策': 'Yes'},
-                {GMAT: 590, GPA: 3.50, 'GMAT 定量评分': 80, '决策': 'Yes'},
-                {GMAT: 400, GPA: 3.85, 'GMAT 定量评分': 45, '决策': 'No'},
-                {GMAT: 640, GPA: 3.50, 'GMAT 定量评分': 75, '决策': 'Yes'},
-                {GMAT: 540, GPA: 3.00, 'GMAT 定量评分': 60, '决策': '?'},
-                {GMAT: 690, GPA: 2.85, 'GMAT 定量评分': 80, '决策': '?'},
-                {GMAT: 490, GPA: 4.00, 'GMAT 定量评分': 65, '决策': '?'}
+                { GMAT: 650, GPA: 2.75, 'GMAT 定量评分': 35, '决策': 'No' },
+                { GMAT: 580, GPA: 3.50, 'GMAT 定量评分': 70, '决策': 'No' },
+                { GMAT: 600, GPA: 3.50, 'GMAT 定量评分': 75, '决策': 'Yes' },
+                { GMAT: 450, GPA: 2.95, 'GMAT 定量评分': 80, '决策': 'No' },
+                { GMAT: 700, GPA: 3.25, 'GMAT 定量评分': 90, '决策': 'Yes' },
+                { GMAT: 590, GPA: 3.50, 'GMAT 定量评分': 80, '决策': 'Yes' },
+                { GMAT: 400, GPA: 3.85, 'GMAT 定量评分': 45, '决策': 'No' },
+                { GMAT: 640, GPA: 3.50, 'GMAT 定量评分': 75, '决策': 'Yes' },
+                { GMAT: 540, GPA: 3.00, 'GMAT 定量评分': 60, '决策': '?' },
+                { GMAT: 690, GPA: 2.85, 'GMAT 定量评分': 80, '决策': '?' },
+                { GMAT: 490, GPA: 4.00, 'GMAT 定量评分': 65, '决策': '?' }
             ];
 
         function distribute(data, stats) {
@@ -186,4 +188,4 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
             }
         });
     }])
-;
+    ;
