@@ -4,7 +4,8 @@
   "description": "Online demo for id3 classification process: http://id3.jijiyy.me",
   "main": "app.js",
   "scripts": {
-    "test": "gulp mocha && gulp test"
+    "test": "gulp mocha && gulp test",
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,7 @@
     "semantic-ui": "^2.1.8"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "3.9.1",
     "gulp-bump": "^2.1.0",
     "gulp-clean": "^0.3.2",
     "gulp-jade": "^1.1.0",
@@ -41,7 +42,7 @@
     "jasmine-core": "^2.4.1",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
-    "karma": "^0.13.22",
+    "karma": "^4.1.0",
     "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
