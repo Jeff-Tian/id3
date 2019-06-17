@@ -1,14 +1,17 @@
 sudo: false
 language: node_js
 node_js:
-- '8'
-- '10'
+  - "8"
+  - "10"
 install:
-- npm i npminstall && npminstall
+  - npm i npminstall && npminstall
+  - npm install -g bower
+before_script:
+  - bower install
 script:
-- npm test && gulp heroku
+  - npm test && gulp heroku
 after_script:
-- npminstall codecov && codecov
+  - npminstall codecov && codecov
 deploy:
   provider: heroku
   api_key:
