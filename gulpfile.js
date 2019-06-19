@@ -110,25 +110,24 @@ gulp.task("jadeTemplate", function(done) {
 });
 
 function runJade(jadeFiles, done) {
-  return jadeFiles.forEach(function(jf) {
-    if (!jf.src || !jf.dest) return done();
+  const jf = jadeFiles[0];
 
-    gulp
-      .src(jf.src)
-      .pipe(
-        jade({
-          locals: {
-            __: function(key) {
-              return zhCN[key];
-            }
+  if (!jf.src || !jf.dest) return;
+
+  return gulp
+    .src(jf.src)
+    .pipe(
+      jade({
+        locals: {
+          __: function(key) {
+            return zhCN[key];
           }
-        })
-      )
-      .pipe(gulp.dest(jf.dest));
-
-    done();
-  });
+        }
+      })
+    )
+    .pipe(gulp.dest(jf.dest));
 }
+
 gulp.task("jade", function(done) {
   var jadeFiles = [
     {
