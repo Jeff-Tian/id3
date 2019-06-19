@@ -13,8 +13,14 @@ script:
 after_script:
   - npminstall codecov && codecov
 deploy:
-  provider: heroku
-  api_key:
-    secure: f4woz4Bp2IvvlUldDfQY/e7IiEbY5JPQP6jraFE0U56CxwyPHdmnG4cAzaaOVWqDI2ZPbGqrC6fdThkxAJ2w7HuSlk+uvedbyI5O76nxat3Pq495evysB91XFqHXsqJwq8EKivf/W48CXtugmTYt2inQMYAAWxILhbMnTFH3bZFOvTpxuilzuba91vQYmNZar0yPPIbvNMz2XR2b69MJ4F8bEMm2whhBWRUYSfQ2zdorMxFHsa7MECQ4Uz7XMyAACvK5XS6cjhnNsoAiTTXJRuY4Uptyez3HGZ8cdBFBMcaAK1nFUmznhakkfeTxQSrrx++9j2vZtK5cDlzYoUdioMu4Phr9hE/YksfwhlUfCLDJ4NhTltzjKOxqZFlkDu2gmVivCAB4uqRcmlZLLbv7CvZb3mINEkam26lpvYFo39DKwGfg/qWhf5Kl18xayt1X27Hf6dmxQNiBLr5eH01+Bh7Q/4ZXiLsSDJKMixvaNCwPFWZOnDbxIYbbLwp9FPOWIFeiJSjVYsaPWTvrxhpUzDX7aP97nSWKX30iBEKmu5YWRwkSXVVx2PC37DnIYtvx1dArrknmHHtf+LcT25oWh5GO7bjjOt6Pdd3fnwKU4t+RxM1QJ1gUHs5LEM+ngDrXptuGt3vdeqUIIU42WSg2SeStEbBdgFjVIKasRXf3+uM=
-  app: id3-demo
-  skip_cleanup: true
+  - provider: heroku
+    api_key:
+      secure: f4woz4Bp2IvvlUldDfQY/e7IiEbY5JPQP6jraFE0U56CxwyPHdmnG4cAzaaOVWqDI2ZPbGqrC6fdThkxAJ2w7HuSlk+uvedbyI5O76nxat3Pq495evysB91XFqHXsqJwq8EKivf/W48CXtugmTYt2inQMYAAWxILhbMnTFH3bZFOvTpxuilzuba91vQYmNZar0yPPIbvNMz2XR2b69MJ4F8bEMm2whhBWRUYSfQ2zdorMxFHsa7MECQ4Uz7XMyAACvK5XS6cjhnNsoAiTTXJRuY4Uptyez3HGZ8cdBFBMcaAK1nFUmznhakkfeTxQSrrx++9j2vZtK5cDlzYoUdioMu4Phr9hE/YksfwhlUfCLDJ4NhTltzjKOxqZFlkDu2gmVivCAB4uqRcmlZLLbv7CvZb3mINEkam26lpvYFo39DKwGfg/qWhf5Kl18xayt1X27Hf6dmxQNiBLr5eH01+Bh7Q/4ZXiLsSDJKMixvaNCwPFWZOnDbxIYbbLwp9FPOWIFeiJSjVYsaPWTvrxhpUzDX7aP97nSWKX30iBEKmu5YWRwkSXVVx2PC37DnIYtvx1dArrknmHHtf+LcT25oWh5GO7bjjOt6Pdd3fnwKU4t+RxM1QJ1gUHs5LEM+ngDrXptuGt3vdeqUIIU42WSg2SeStEbBdgFjVIKasRXf3+uM=
+    app: id3-demo
+    skip_cleanup: true
+  - provider: pages
+    skip_cleanup: true
+    keep_history: true
+    github_token: $GITHUB_TOKEN
+    local_dir: public
+    target_branch: gh-pages
