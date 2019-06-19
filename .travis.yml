@@ -1,7 +1,6 @@
 sudo: false
 language: node_js
 node_js:
-  - "8"
   - "10"
 install:
   - npm i npminstall && npminstall
@@ -22,5 +21,5 @@ deploy:
     skip_cleanup: true
     keep_history: true
     github_token: $GITHUB_TOKEN
-    local_dir: public
+    local_dir: dist
     target_branch: gh-pages
