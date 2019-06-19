@@ -86,7 +86,7 @@ gulp.task("copy", function(done) {
 });
 
 gulp.task("copy-locales", function(done) {
-  return gulp.src(["locales/**/*"]).pipe(gulp.dest("dist/"));
+  return gulp.src(["locales/**/*"]).pipe(gulp.dest("dist/locales"));
 });
 
 gulp.task("uglify-js", function(done) {
