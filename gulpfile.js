@@ -58,6 +58,7 @@ gulp.task("heroku", function(done) {
     "jadeTemplate",
     "jadeIndex",
     "copy",
+    "copy-locales",
     "uglify-js",
     "uglify-css",
     done
@@ -82,6 +83,10 @@ gulp.task("clean", function(done) {
 
 gulp.task("copy", function(done) {
   return gulp.src(["public/**/*"]).pipe(gulp.dest("dist/"));
+});
+
+gulp.task("copy-locales", function(done) {
+  return gulp.src(["locales/**/*"]).pipe(gulp.dest("dist/"));
 });
 
 gulp.task("uglify-js", function(done) {
