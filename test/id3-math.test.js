@@ -78,7 +78,7 @@ describe('ID3 Math for enjoySports', () => {
         Water: 'Cool',
         Forecast: 'Change',
         决策: 'Yes'
-    }]
+    }];
 
     it('ranges correctly', () => {
         assert.deepStrictEqual(id3Math.getAttributesRanges(data), {
@@ -232,7 +232,7 @@ describe('Sub divide', function () {
             [600, Infinity]
         ];
         assert.deepStrictEqual(id3Math.subDivide(data, attribute, range), {
-            '600 <= attr < Infinity': {
+            '600 <= GMAT < Infinity': {
                 "entropy": 1.3709505944546687,
                 sum: 5,
                 set: {
@@ -267,7 +267,7 @@ describe('Sub divide', function () {
                     "决策": "?"
                 }]
             },
-            '-Infinity <= attr < 600': {
+            '-Infinity <= GMAT < 600': {
                 "entropy": 1.4591479170272446,
                 sum: 6,
                 set: {
@@ -349,7 +349,7 @@ describe('Information Gain', function () {
             },
             sum: 11
         }, {
-            '600 <= attr < Infinity': {
+            '600 <= GMAT < Infinity': {
                 entropy: 1.3709505944546687,
                 sum: 5,
                 set: {
@@ -358,7 +358,7 @@ describe('Information Gain', function () {
                     '?': 1
                 }
             },
-            '-Infinity <= attr < 600': {
+            '-Infinity <= GMAT < 600': {
                 entropy: 1.4591479170272446,
                 sum: 6,
                 set: {
@@ -370,3 +370,31 @@ describe('Information Gain', function () {
         }), 0.15356543894636276);
     });
 });
+
+describe('Information gain for enjoySports', () => {
+    it('calculates gain', () => {
+        assert.equal(id3Math.gain({
+            entropy: 0.81127812445913286391,
+            set: {
+                No: 1,
+                Yes: 3
+            },
+            sum: 4
+        }, {
+            'Sky = Sunny': {
+                entropy: 0,
+                sum: 3,
+                set: {
+                    Yes: 3,
+                }
+            },
+            'Sky = Rainy': {
+                entropy: 0,
+                sum: 1,
+                set: {
+                    No: 1,
+                }
+            }
+        }),  0.8112781244591328);
+    })
+})
