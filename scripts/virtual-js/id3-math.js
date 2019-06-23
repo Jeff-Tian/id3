@@ -10,13 +10,7 @@
     }
 
     function col(rows, index) {
-        var a = [];
-
-        for (var i = 0; i < rows.length; i++) {
-            a.push(rows[i][index]);
-        }
-
-        return a;
+        return rows.map(row => row[index])
     }
 
     function getCols(dataArray) {
@@ -201,8 +195,7 @@
         angular.module('id3MathModule', [])
             .factory('id3', [function () {
                 return id3Math;
-            }])
-        ;
+            }]);
     }
 
     if (typeof module !== 'undefined' && module.exports) {
