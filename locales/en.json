@@ -17,7 +17,6 @@
 	"原始数据": "The original data",
 	"质心": "Centroid",
 	"类": "Cluster",
-	"在紫竹叽歪上查看更多": "More on zizhujy.com",
 	"源代码": "Source Code",
 	"编译状态": "Building Status",
 	"在线可视化体验 ID3 分类算法.": "在线可视化体验 ID3 分类算法.",
@@ -36,5 +35,6 @@
 	"数据分布": "Data Distribution",
 	"数据拆分分布": "Data Split Distribution",
 	"Gain": "Gain",
-	"enjoySports": "Enjoy Sports Classical Example"
+	"enjoySports": "Enjoy Sports Classical Example",
+	"AI 三子棋": "Tic Tac Toe AI"
 }
