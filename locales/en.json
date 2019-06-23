@@ -31,9 +31,10 @@
 	"Upper": "Upper",
 	"Range": "Range",
 	"Category": "Category",
-	"数据统计": "数据统计",
+	"数据统计": "Statistics",
 	"Split by": "Split by",
-	"数据分布": "数据分布",
-	"数据拆分分布": "数据拆分分布",
-	"Gain": "Gain"
+	"数据分布": "Data Distribution",
+	"数据拆分分布": "Data Split Distribution",
+	"Gain": "Gain",
+	"enjoySports": "Enjoy Sports Classical Example"
 }
