@@ -2,11 +2,26 @@ var id3Math = require('../public/scripts/virtual-js/id3-math');
 var assert = require('assert');
 
 describe('ID3 Math', function () {
-    var data = [
-        {id: 1, data: 2, d: 'Yes'},
-        {id: 2, data: 4, d: 'No'},
-        {id: 3, data: 8, d: 'Yes'},
-        {id: 4, data: 9, d: 'Yes'}
+    var data = [{
+            id: 1,
+            data: 2,
+            d: 'Yes'
+        },
+        {
+            id: 2,
+            data: 4,
+            d: 'No'
+        },
+        {
+            id: 3,
+            data: 8,
+            d: 'Yes'
+        },
+        {
+            id: 4,
+            data: 9,
+            d: 'Yes'
+        }
     ];
 
     it('returns columns of an array of data', function () {
@@ -29,6 +44,54 @@ describe('ID3 Math', function () {
         });
     });
 });
+
+describe('ID3 Math for enjoySports', () => {
+    const data = [{
+        Sky: 'Sunny',
+        AirTemp: 'Warm',
+        Humidity: 'Normal',
+        Wind: 'Strong',
+        Water: 'Warm',
+        Forecast: 'Same',
+        决策: 'Yes'
+    }, {
+        Sky: 'Sunny',
+        AirTemp: 'Warm',
+        Humidity: 'High',
+        Wind: 'Strong',
+        Water: 'Warm',
+        Forecast: 'Same',
+        决策: 'Yes'
+    }, {
+        Sky: 'Rainy',
+        AirTemp: 'Cold',
+        Humidity: 'High',
+        Wind: 'Strong',
+        Water: 'Warm',
+        Forecast: 'Change',
+        决策: 'No'
+    }, {
+        Sky: 'Sunny',
+        AirTemp: 'Warm',
+        Humidity: 'High',
+        Wind: 'Strong',
+        Water: 'Cool',
+        Forecast: 'Change',
+        决策: 'Yes'
+    }]
+
+    it('ranges correctly', () => {
+        assert.deepStrictEqual(id3Math.getAttributesRanges(data), {
+            Sky: ['Sunny', 'Rainy'],
+            AirTemp: ['Warm', 'Cold'],
+            Humidity: ['Normal', 'High'],
+            Wind: ['Strong'],
+            Water: ['Warm', 'Cool'],
+            Forecast: ['Same', 'Change'],
+            决策: ['Yes', 'No']
+        })
+    })
+})
 
 describe('ID3 Math 2', function () {
     it('descrets continous range', function () {
@@ -96,40 +159,123 @@ describe('Index of categories', function () {
 
 describe('Sub divide', function () {
     it('sub divides data', function () {
-        var data = [
-            {GMAT: 650, GPA: 2.75, 'GMAT 定量评分': 35, '决策': 'No'},
-            {GMAT: 580, GPA: 3.50, 'GMAT 定量评分': 70, '决策': 'No'},
-            {GMAT: 600, GPA: 3.50, 'GMAT 定量评分': 75, '决策': 'Yes'},
-            {GMAT: 450, GPA: 2.95, 'GMAT 定量评分': 80, '决策': 'No'},
-            {GMAT: 700, GPA: 3.25, 'GMAT 定量评分': 90, '决策': 'Yes'},
-            {GMAT: 590, GPA: 3.50, 'GMAT 定量评分': 80, '决策': 'Yes'},
-            {GMAT: 400, GPA: 3.85, 'GMAT 定量评分': 45, '决策': 'No'},
-            {GMAT: 640, GPA: 3.50, 'GMAT 定量评分': 75, '决策': 'Yes'},
-            {GMAT: 540, GPA: 3.00, 'GMAT 定量评分': 60, '决策': '?'},
-            {GMAT: 690, GPA: 2.85, 'GMAT 定量评分': 80, '决策': '?'},
-            {GMAT: 490, GPA: 4.00, 'GMAT 定量评分': 65, '决策': '?'}
+        var data = [{
+                GMAT: 650,
+                GPA: 2.75,
+                'GMAT 定量评分': 35,
+                '决策': 'No'
+            },
+            {
+                GMAT: 580,
+                GPA: 3.50,
+                'GMAT 定量评分': 70,
+                '决策': 'No'
+            },
+            {
+                GMAT: 600,
+                GPA: 3.50,
+                'GMAT 定量评分': 75,
+                '决策': 'Yes'
+            },
+            {
+                GMAT: 450,
+                GPA: 2.95,
+                'GMAT 定量评分': 80,
+                '决策': 'No'
+            },
+            {
+                GMAT: 700,
+                GPA: 3.25,
+                'GMAT 定量评分': 90,
+                '决策': 'Yes'
+            },
+            {
+                GMAT: 590,
+                GPA: 3.50,
+                'GMAT 定量评分': 80,
+                '决策': 'Yes'
+            },
+            {
+                GMAT: 400,
+                GPA: 3.85,
+                'GMAT 定量评分': 45,
+                '决策': 'No'
+            },
+            {
+                GMAT: 640,
+                GPA: 3.50,
+                'GMAT 定量评分': 75,
+                '决策': 'Yes'
+            },
+            {
+                GMAT: 540,
+                GPA: 3.00,
+                'GMAT 定量评分': 60,
+                '决策': '?'
+            },
+            {
+                GMAT: 690,
+                GPA: 2.85,
+                'GMAT 定量评分': 80,
+                '决策': '?'
+            },
+            {
+                GMAT: 490,
+                GPA: 4.00,
+                'GMAT 定量评分': 65,
+                '决策': '?'
+            }
         ];
         var attribute = 'GMAT';
-        var range = [[-Infinity, 600], [600, Infinity]];
+        var range = [
+            [-Infinity, 600],
+            [600, Infinity]
+        ];
         assert.deepStrictEqual(id3Math.subDivide(data, attribute, range), {
             '600 <= attr < Infinity': {
-                "entropy": 1.3709505944546687, sum: 5, set: {No: 1, Yes: 3, '?': 1}, "rawData": [
-                    {
-                        "GMAT": 650, "GMAT 定量评分": 35, "GPA": 2.75, "决策": "No"
-                    }, {
-                        "GMAT": 600, "GMAT 定量评分": 75, "GPA": 3.5, "决策": "Yes"
-                    }, {
-                        "GMAT": 700, "GMAT 定量评分": 90, "GPA": 3.25, "决策": "Yes"
-                    }, {
-                        "GMAT": 640, "GMAT 定量评分": 75, "GPA": 3.5, "决策": "Yes"
-                    }, {
-                        "GMAT": 690, "GMAT 定量评分": 80, "GPA": 2.85, "决策": "?"
-                    }
-                ]
+                "entropy": 1.3709505944546687,
+                sum: 5,
+                set: {
+                    No: 1,
+                    Yes: 3,
+                    '?': 1
+                },
+                "rawData": [{
+                    "GMAT": 650,
+                    "GMAT 定量评分": 35,
+                    "GPA": 2.75,
+                    "决策": "No"
+                }, {
+                    "GMAT": 600,
+                    "GMAT 定量评分": 75,
+                    "GPA": 3.5,
+                    "决策": "Yes"
+                }, {
+                    "GMAT": 700,
+                    "GMAT 定量评分": 90,
+                    "GPA": 3.25,
+                    "决策": "Yes"
+                }, {
+                    "GMAT": 640,
+                    "GMAT 定量评分": 75,
+                    "GPA": 3.5,
+                    "决策": "Yes"
+                }, {
+                    "GMAT": 690,
+                    "GMAT 定量评分": 80,
+                    "GPA": 2.85,
+                    "决策": "?"
+                }]
             },
             '-Infinity <= attr < 600': {
-                "entropy": 1.4591479170272446, sum: 6, set: {No: 3, Yes: 1, '?': 2}, rawData: [
-                    {
+                "entropy": 1.4591479170272446,
+                sum: 6,
+                set: {
+                    No: 3,
+                    Yes: 1,
+                    '?': 2
+                },
+                rawData: [{
                         "GMAT": 580,
                         "GMAT 定量评分": 70,
                         "GPA": 3.5,
@@ -173,8 +319,22 @@ describe('Sub divide', function () {
 
 describe('entropy', function () {
     it('calculates entropy', function () {
-        assert.equal(id3Math.entropy({sum: 5, set: {No: 1, Yes: 3, '?': 1}}), 1.3709505944546687);
-        assert.equal(id3Math.entropy({sum: 6, set: {No: 3, Yes: 1, '?': 2}}), 1.4591479170272446);
+        assert.equal(id3Math.entropy({
+            sum: 5,
+            set: {
+                No: 1,
+                Yes: 3,
+                '?': 1
+            }
+        }), 1.3709505944546687);
+        assert.equal(id3Math.entropy({
+            sum: 6,
+            set: {
+                No: 3,
+                Yes: 1,
+                '?': 2
+            }
+        }), 1.4591479170272446);
     });
 });
 
@@ -189,8 +349,24 @@ describe('Information Gain', function () {
             },
             sum: 11
         }, {
-            '600 <= attr < Infinity': {entropy: 1.3709505944546687, sum: 5, set: {No: 1, Yes: 3, '?': 1}},
-            '-Infinity <= attr < 600': {entropy: 1.4591479170272446, sum: 6, set: {No: 3, Yes: 1, '?': 2}}
+            '600 <= attr < Infinity': {
+                entropy: 1.3709505944546687,
+                sum: 5,
+                set: {
+                    No: 1,
+                    Yes: 3,
+                    '?': 1
+                }
+            },
+            '-Infinity <= attr < 600': {
+                entropy: 1.4591479170272446,
+                sum: 6,
+                set: {
+                    No: 3,
+                    Yes: 1,
+                    '?': 2
+                }
+            }
         }), 0.15356543894636276);
     });
 });

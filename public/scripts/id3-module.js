@@ -47,7 +47,39 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
         };
     }])
     .controller('ID3Ctrl', ['$scope', 'id3', '$filter', '$q', function ($scope, id3, $filter, $q) {
-        $scope.testData = [{
+        $scope.testData = location.search.indexOf('enjoySports') >= 0 ? [{
+            Sky: 'Sunny',
+            AirTemp: 'Warm',
+            Humidity: 'Normal',
+            Wind: 'Strong',
+            Water: 'Warm',
+            Forecast: 'Same',
+            决策: 'Yes'
+        }, {
+            Sky: 'Sunny',
+            AirTemp: 'Warm',
+            Humidity: 'High',
+            Wind: 'Strong',
+            Water: 'Warm',
+            Forecast: 'Same',
+            决策: 'Yes'
+        }, {
+            Sky: 'Rainy',
+            AirTemp: 'Cold',
+            Humidity: 'High',
+            Wind: 'Strong',
+            Water: 'Warm',
+            Forecast: 'Change',
+            决策: 'No'
+        }, {
+            Sky: 'Sunny',
+            AirTemp: 'Warm',
+            Humidity: 'High',
+            Wind: 'Strong',
+            Water: 'Cool',
+            Forecast: 'Change',
+            决策: 'Yes'
+        }] : [{
                 GMAT: 650,
                 GPA: 2.75,
                 'GMAT 定量评分': 35,
@@ -139,6 +171,8 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
                 }
             };
 
+            console.log('theAttr = ', theAttr)
+            console.log('stats = ', JSON.stringify(stats))
             distribute(data, stats);
 
             stats.range = id3.getAttributesRanges(data, theAttr);
@@ -222,12 +256,8 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
             autoWrapRow: true,
             Controller: true,
             minSpareRows: 1,
-            beforeChange: function (changes, source) {
-                console.log('args = ', changes, source)
-            },
+            beforeChange: function (changes, source) {},
             afterChange: function () {
-                console.log(arguments);
-                console.log(this);
                 $scope.testData = this.getData().filter(function (a) {
                     return a.reduce(function (prev, next) {
                         return prev && next !== null;

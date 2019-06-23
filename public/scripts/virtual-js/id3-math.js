@@ -24,9 +24,13 @@
     }
 
     function getAttributesRanges(data, theAttr) {
-        console.log('theAttr = ', theAttr);
+        console.log('getting attr ranges = ', theAttr)
         var cols = getCols(data);
         var ranges = {};
+
+        if (theAttr === undefined) {
+            debugger;
+        }
 
         for (var h in cols) {
             if (h === theAttr) {
@@ -39,17 +43,7 @@
             if (cols[h] instanceof Array && typeof cols[h][0] === 'number') {
                 ranges[h] = [Math.min.apply(null, cols[h]), Math.max.apply(null, cols[h])];
             } else {
-                var d = {};
-                ranges[h] = [];
-
-                for (var i = 0; i < cols[h].length; i++) {
-                    if (d.hasOwnProperty(cols[h][i])) {
-                        continue;
-                    }
-
-                    d[cols[h][i]] = 1;
-                    ranges[h].push(cols[h][i]);
-                }
+                ranges[h] = Array.from(new Set(cols[h]));
             }
         }
 
@@ -121,6 +115,7 @@
     function subDivide(data, attr, categories) {
         var res = {};
 
+        console.log('data = ', data, attr, categories)
         for (var i = 0; i < data.length; i++) {
             var r = indexOfCategories(categories, data[i][attr]);
             var h = hash(attr, r);
@@ -150,8 +145,16 @@
         return res;
     }
 
+    var count = 0;
+
     function indexOfCategories(categories, value) {
-        // console.log('checking ', value);
+        count++;
+        console.log('checking ', categories, value, count);
+
+        if (count >= 100) {
+            return;
+        }
+
         var currentIndex = Math.floor(categories.length / 2);
 
         if (value >= categories[currentIndex][0] && value < categories[currentIndex][1]) {
