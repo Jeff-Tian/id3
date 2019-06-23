@@ -131,4 +131,4 @@ function runJade(jadeFiles) {
 }
 
 
-gulp.task("default", gulp.series("clean", "mocha", "test", "jade", "start"));
+gulp.task("default", gulp.series("heroku", "start"));

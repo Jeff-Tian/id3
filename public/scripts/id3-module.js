@@ -215,24 +215,33 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
         var container = document.getElementById('data-table');
         var hot = new Handsontable(container, {
             data: $scope.testData,
-            colHeaders: $scope.testData[0].keys(),
-            maxCols: this.colHeaders.length,
+            colHeaders: Object.keys($scope.testData[0]),
+            maxCols: Object.keys($scope.testData[0]).length,
             rowHeaders: true,
             contextMenu: true,
             autoWrapRow: true,
             Controller: true,
             minSpareRows: 1,
-            beforeChange: function (changes, source) {},
+            beforeChange: function (changes, source) {
+                console.log('args = ', changes, source)
+            },
             afterChange: function () {
+                console.log(arguments);
+                console.log(this);
                 $scope.testData = this.getData().filter(function (a) {
-                    return (a[0] !== null && a[1] !== null && a[2] !== null && a[3] !== null);
+                    return a.reduce(function (prev, next) {
+                        return prev && next !== null;
+                    }, true);
                 }).map(function (a) {
-                    return {
-                        GMAT: a[0],
-                        GPA: a[1],
-                        'GMAT 定量评分': a[2],
-                        '决策': a[3]
+                    var res = {};
+
+                    var keys = Object.keys($scope.testData[0]);
+
+                    for (var i = 0; i < keys.length; i++) {
+                        res[keys[i]] = a[i];
                     }
+
+                    return res;
                 });
             }
         });
