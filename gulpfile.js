@@ -43,8 +43,6 @@ gulp.task("bump", function () {
     .pipe(gulp.dest("./"));
 });
 
-gulp.task("default", gulp.series("clean", "mocha", "test", "jadeTemplate", "start"));
-
 gulp.task("clean", function (done) {
   return gulp.src(["dist", "public/templates"], {
     read: false,
@@ -131,3 +129,6 @@ function runJade(jadeFiles) {
     )
     .pipe(gulp.dest(jf.dest))));
 }
+
+
+gulp.task("default", gulp.series("clean", "mocha", "test", "jade", "start"));

@@ -19,9 +19,9 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
             }
 
             $http({
-                method: 'GET',
-                url: '/locales/' + options.key + '.json'
-            })
+                    method: 'GET',
+                    url: '/locales/' + options.key + '.json'
+                })
                 .then(
                     function (result) {
                         dfd.resolve(result);
@@ -47,20 +47,73 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
         };
     }])
     .controller('ID3Ctrl', ['$scope', 'id3', '$filter', '$q', function ($scope, id3, $filter, $q) {
-        $scope.testData =
-            [
-                { GMAT: 650, GPA: 2.75, 'GMAT 定量评分': 35, '决策': 'No' },
-                { GMAT: 580, GPA: 3.50, 'GMAT 定量评分': 70, '决策': 'No' },
-                { GMAT: 600, GPA: 3.50, 'GMAT 定量评分': 75, '决策': 'Yes' },
-                { GMAT: 450, GPA: 2.95, 'GMAT 定量评分': 80, '决策': 'No' },
-                { GMAT: 700, GPA: 3.25, 'GMAT 定量评分': 90, '决策': 'Yes' },
-                { GMAT: 590, GPA: 3.50, 'GMAT 定量评分': 80, '决策': 'Yes' },
-                { GMAT: 400, GPA: 3.85, 'GMAT 定量评分': 45, '决策': 'No' },
-                { GMAT: 640, GPA: 3.50, 'GMAT 定量评分': 75, '决策': 'Yes' },
-                { GMAT: 540, GPA: 3.00, 'GMAT 定量评分': 60, '决策': '?' },
-                { GMAT: 690, GPA: 2.85, 'GMAT 定量评分': 80, '决策': '?' },
-                { GMAT: 490, GPA: 4.00, 'GMAT 定量评分': 65, '决策': '?' }
-            ];
+        $scope.testData = [{
+                GMAT: 650,
+                GPA: 2.75,
+                'GMAT 定量评分': 35,
+                '决策': 'No'
+            },
+            {
+                GMAT: 580,
+                GPA: 3.50,
+                'GMAT 定量评分': 70,
+                '决策': 'No'
+            },
+            {
+                GMAT: 600,
+                GPA: 3.50,
+                'GMAT 定量评分': 75,
+                '决策': 'Yes'
+            },
+            {
+                GMAT: 450,
+                GPA: 2.95,
+                'GMAT 定量评分': 80,
+                '决策': 'No'
+            },
+            {
+                GMAT: 700,
+                GPA: 3.25,
+                'GMAT 定量评分': 90,
+                '决策': 'Yes'
+            },
+            {
+                GMAT: 590,
+                GPA: 3.50,
+                'GMAT 定量评分': 80,
+                '决策': 'Yes'
+            },
+            {
+                GMAT: 400,
+                GPA: 3.85,
+                'GMAT 定量评分': 45,
+                '决策': 'No'
+            },
+            {
+                GMAT: 640,
+                GPA: 3.50,
+                'GMAT 定量评分': 75,
+                '决策': 'Yes'
+            },
+            {
+                GMAT: 540,
+                GPA: 3.00,
+                'GMAT 定量评分': 60,
+                '决策': '?'
+            },
+            {
+                GMAT: 690,
+                GPA: 2.85,
+                'GMAT 定量评分': 80,
+                '决策': '?'
+            },
+            {
+                GMAT: 490,
+                GPA: 4.00,
+                'GMAT 定量评分': 65,
+                '决策': '?'
+            }
+        ];
 
         function distribute(data, stats) {
             var total = 0;
@@ -162,18 +215,14 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
         var container = document.getElementById('data-table');
         var hot = new Handsontable(container, {
             data: $scope.testData,
-            colHeaders: [
-                //{data: 'GMAT'}, {data: 'GPA'}, {data: 'GMAT 定量评分'}, {data: '决策'}
-                'GMAT', 'GPA', 'GMAT 定量评分', '决策'
-            ],
-            maxCols: 4,
+            colHeaders: $scope.testData[0].keys(),
+            maxCols: this.colHeaders.length,
             rowHeaders: true,
             contextMenu: true,
             autoWrapRow: true,
             Controller: true,
             minSpareRows: 1,
-            beforeChange: function (changes, source) {
-            },
+            beforeChange: function (changes, source) {},
             afterChange: function () {
                 $scope.testData = this.getData().filter(function (a) {
                     return (a[0] !== null && a[1] !== null && a[2] !== null && a[3] !== null);
@@ -187,5 +236,4 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
                 });
             }
         });
-    }])
-    ;
+    }]);
