@@ -95,14 +95,6 @@ gulp.task("jade", function (done) {
   return runJade(jadeFiles)(done);
 });
 
-gulp.task("heroku", gulp.series(
-  "clean",
-  "jade",
-  "copy",
-  "copy-locales",
-  "uglify-js",
-  "uglify-css"));
-
 gulp.task("replace", function (done) {
   var replace = require("gulp-replace");
 
@@ -114,6 +106,15 @@ gulp.task("replace", function (done) {
 
   done();
 });
+
+gulp.task("heroku", gulp.series(
+  "clean",
+  "replace",
+  "jade",
+  "copy",
+  "copy-locales",
+  "uglify-js",
+  "uglify-css"));
 
 function runJade(jadeFiles) {
   return gulp.parallel(...jadeFiles.map(jf => () => gulp

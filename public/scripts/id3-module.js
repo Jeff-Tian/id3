@@ -255,6 +255,7 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
             autoWrapRow: true,
             Controller: true,
             minSpareRows: 1,
+            enterBeginsEditing: false,
             beforeChange: function (changes, source) {},
             afterChange: function () {
                 $scope.testData = this.getData().filter(function (a) {
