@@ -4,7 +4,6 @@ var sh = require("shelljs");
 var karma = require("karma").server;
 var bump = require("gulp-bump");
 var print = require("gulp-print"),
-  runSequence = require("run-sequence"),
   uglify = require("gulp-uglify"),
   clean = require("gulp-clean"),
   uglifyCss = require("gulp-minify-css"),
@@ -44,13 +43,7 @@ gulp.task("bump", function () {
     .pipe(gulp.dest("./"));
 });
 
-gulp.task("release", function (done) {
-  return runSequence("jshint", "bump", "build", done);
-});
-
-gulp.task("default", function (done) {
-  return runSequence("clean", "mocha", "test", "jadeTemplate", "start", done);
-});
+gulp.task("default", gulp.series("clean", "mocha", "test", "jadeTemplate", "start"));
 
 gulp.task("clean", function (done) {
   return gulp.src(["dist", "public/templates"], {
@@ -85,11 +78,19 @@ gulp.task("uglify-css", function (done) {
 gulp.task("jade", function (done) {
   var jadeFiles = [{
       src: "./views/index.jade",
-      dest: "./dist/"
+      dest: "./dist/",
+      locale: zhCN
     },
     {
       src: "./views/templates/stats.jade",
-      dest: "./dist/templates/"
+      dest: "./dist/templates/",
+      locale: zhCN
+    },
+
+    {
+      src: './views/index.jade',
+      dest: './dist/en/',
+      locale: enUS
     }
   ];
 
@@ -116,14 +117,14 @@ gulp.task("replace", function (done) {
   done();
 });
 
-function runJade(jadeFiles, locales = zhCN) {
+function runJade(jadeFiles) {
   return gulp.parallel(...jadeFiles.map(jf => () => gulp
     .src(jf.src)
     .pipe(
       jade({
         locals: {
           __: function (key) {
-            return locales[key];
+            return jf.locale[key];
           }
         }
       })
