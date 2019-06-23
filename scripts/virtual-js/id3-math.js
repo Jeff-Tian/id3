@@ -10,7 +10,7 @@
     }
 
     function col(rows, index) {
-        return rows.map(row => row[index])
+        return rows.map(row => row[index]);
     }
 
     function getCols(dataArray) {
