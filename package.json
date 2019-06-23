@@ -31,7 +31,7 @@
     "semantic-ui": "^2.1.8"
   },
   "devDependencies": {
-    "gulp": "3.9.1",
+    "gulp": "^4.0.2",
     "gulp-bump": "^2.1.0",
     "gulp-clean": "^0.3.2",
     "gulp-jade": "^1.1.0",
@@ -49,7 +49,7 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "mocha": "^6.1.4",
     "phantomjs-prebuilt": "^2.1.5",
-    "run-sequence": "^1.2.1",
+    "run-sequence": "latest",
     "shelljs": "^0.6.0"
   },
   "directories": {
