@@ -171,13 +171,12 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
                 }
             };
 
-            console.log('theAttr = ', theAttr)
-            console.log('stats = ', JSON.stringify(stats))
             distribute(data, stats);
 
             stats.range = id3.getAttributesRanges(data, theAttr);
             stats.categories = id3.divideRanges(stats.range);
 
+            console.log('cat = ', stats.categories)
             stats.subCategories = {};
             stats.subGains = {};
             var maxGain = -Infinity;

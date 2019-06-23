@@ -24,13 +24,8 @@
     }
 
     function getAttributesRanges(data, theAttr) {
-        console.log('getting attr ranges = ', theAttr)
         var cols = getCols(data);
         var ranges = {};
-
-        if (theAttr === undefined) {
-            debugger;
-        }
 
         for (var h in cols) {
             if (h === theAttr) {
@@ -102,22 +97,34 @@
         var res = {};
 
         for (var r in ranges) {
-            res[r] = trisector(ranges[r]);
+            if (ranges[r].reduce(function (prev, next) {
+                    return prev && !isNaN(next);
+                }, true)) {
+                res[r] = trisector(ranges[r]);
+            } else {
+                res[r] = ranges[r];
+            }
         }
 
         return res;
     }
 
     function hash(attr, range) {
-        return range[0] + ' <= attr < ' + range[1];
+        if (range instanceof Array) {
+            return range[0] + ' <= ' + attr + ' < ' + range[1];
+        } else {
+            return attr + ' = ' + range;
+        }
     }
 
     function subDivide(data, attr, categories) {
         var res = {};
 
-        console.log('data = ', data, attr, categories)
         for (var i = 0; i < data.length; i++) {
-            var r = indexOfCategories(categories, data[i][attr]);
+            var r = categories.reduce(function (prev, next) {
+                return prev && (next instanceof Array);
+            }, true) ? indexOfCategories(categories, data[i][attr]) : data[i][attr];
+
             var h = hash(attr, r);
             if (!res.hasOwnProperty(h)) {
                 res[h] = {};
@@ -145,16 +152,7 @@
         return res;
     }
 
-    var count = 0;
-
     function indexOfCategories(categories, value) {
-        count++;
-        console.log('checking ', categories, value, count);
-
-        if (count >= 100) {
-            return;
-        }
-
         var currentIndex = Math.floor(categories.length / 2);
 
         if (value >= categories[currentIndex][0] && value < categories[currentIndex][1]) {
