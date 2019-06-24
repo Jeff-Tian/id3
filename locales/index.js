@@ -15,6 +15,7 @@
         defaultLocale: supportedLocales[0],
 
         generateLocaleLink: function (url, locale) {
+            console.log('url = ', url, locale);
             var localePattern = new RegExp('^(?:/(?:' + helper.supportedLocales.join('|') + '))?(.*$)', 'i');
 
             return url.replace(localePattern, '/' + locale + '$1');
@@ -165,7 +166,6 @@
                 this.$get = [function () {
                     return helper;
                 }];
-            })
-        ;
+            });
     }
 })();
