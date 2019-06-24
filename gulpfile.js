@@ -77,18 +77,30 @@ gulp.task("jade", function (done) {
   var jadeFiles = [{
       src: "./views/index.jade",
       dest: "./dist/",
-      locale: zhCN
+      locale: zhCN,
+      locals: {
+        otherLocaleLink: '/en',
+        otherLocale: 'en'
+      }
     },
     {
       src: "./views/templates/stats.jade",
       dest: "./dist/templates/",
       locale: zhCN
     },
-
+    {
+      src: "./views/templates/stats.jade",
+      dest: "./dist/templates/en/",
+      locale: enUS,
+    },
     {
       src: './views/index.jade',
       dest: './dist/en/',
-      locale: enUS
+      locale: enUS,
+      locals: {
+        otherLocaleLink: '/',
+        otherLocale: 'zh'
+      }
     }
   ];
 
@@ -124,7 +136,8 @@ function runJade(jadeFiles) {
         locals: {
           __: function (key) {
             return jf.locale[key];
-          }
+          },
+          ...(jf.locals || {})
         }
       })
     )

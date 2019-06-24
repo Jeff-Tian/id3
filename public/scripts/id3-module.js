@@ -4,6 +4,8 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
         var locale = localeHelperProvider.getLocale(window.location.pathname);
         $translateProvider.preferredLanguage(locale);
         $translateProvider.useSanitizeValueStrategy('escapeParameters');
+
+        window.locale = locale;
     }])
     .factory('translationLoader', ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
         return function (options) {
@@ -36,6 +38,18 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
         };
     }])
     .directive('tree', [function () {
+        if (window.locale === 'en') {
+            return {
+                templateUrl: '/templates/en/stats.html',
+                scope: {
+                    stats: '='
+                },
+                link: function (scope, element, attrs) {
+
+                }
+            };
+        }
+
         return {
             templateUrl: '/templates/stats.html',
             scope: {
@@ -79,6 +93,14 @@ angular.module('id3Module', ['pascalprecht.translate', 'ngSanitize', 'localeHelp
             Water: 'Cool',
             Forecast: 'Change',
             决策: 'Yes'
+        }, {
+            Sky: 'Sunny',
+            AirTemp: 'Warm',
+            Humidity: 'Normal',
+            Wind: 'Weak',
+            Water: 'Warm',
+            Forecast: 'Same',
+            决策: 'No'
         }] : [{
                 GMAT: 650,
                 GPA: 2.75,
