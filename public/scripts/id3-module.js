@@ -269,13 +269,12 @@ angular
         var statsQueue = [initialStats];
 
         var loops = 0;
-        while (statsQueue.length && loops < 100) {
+        while (statsQueue.length && loops < 10000) {
           loops++;
 
           var theStats = statsQueue.shift();
 
           if (theStats["决策"].entropy <= 0) {
-            console.log("skip ", theStats);
             continue;
           }
 
@@ -291,7 +290,12 @@ angular
             var dataStats = getDataStats(data, theStats.maxGainAttr);
             s.stats = dataStats;
 
-            if (dataStats["决策"].entropy > 0) {
+            if (
+              dataStats["决策"].entropy > 0 &&
+              Object.values(dataStats.subGains).reduce(function(prev, next) {
+                return prev + next;
+              }, 0) > 0
+            ) {
               statsQueue.push(dataStats);
             }
           }
