@@ -35,6 +35,11 @@ html
                 word-wrap: break-word;
             }
 
+            #myDiagramDiv {
+                min-height: 300px;
+                background-color: #6e6e6e;
+            }
+
 body
     div(ng-app="id3Module", ng-controller="ID3Ctrl")
         include partial/nav
@@ -54,4 +59,5 @@ body
         script(src="/scripts/virtual-js/id3-math.js")
         script(src="/scripts/id3-module.js")
         script(src="/bower_components/handsontable/dist/handsontable.full.min.js")
+        script(src="/gojs/release/go-debug.js")
         script(type="text/javascript").

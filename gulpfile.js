@@ -9,9 +9,9 @@ var print = require("gulp-print"),
   uglifyCss = require("gulp-minify-css"),
   jade = require("gulp-jade");
 const zhCN = require("./locales/zh");
-const enUS = require('./locales/en');
+const enUS = require("./locales/en");
 
-gulp.task("jshint", function () {
+gulp.task("jshint", function() {
   gulp
     .src(["./www/js/**/*.js", "./tests/**/*.js"])
     .pipe(jshint())
@@ -19,16 +19,17 @@ gulp.task("jshint", function () {
     .pipe(jshint.reporter("fail"));
 });
 
-gulp.task("mocha", function (done) {
+gulp.task("mocha", function(done) {
   sh.exec("mocha", done);
 });
 
-gulp.task("start", function (done) {
+gulp.task("start", function(done) {
   sh.exec("node app.js", done);
 });
 
-gulp.task("test", function (done) {
-  karma.start({
+gulp.task("test", function(done) {
+  karma.start(
+    {
       configFile: __dirname + "/tests/karma.conf.js",
       singleRun: true
     },
@@ -36,51 +37,60 @@ gulp.task("test", function (done) {
   );
 });
 
-gulp.task("bump", function () {
+gulp.task("bump", function() {
   gulp
     .src(["./package.json", "./bower.json"])
     .pipe(bump())
     .pipe(gulp.dest("./"));
 });
 
-gulp.task("clean", function (done) {
-  return gulp.src(["dist", "public/templates"], {
-    read: false,
-    allowEmpty: true
-  }).pipe(clean());
+gulp.task("clean", function(done) {
+  return gulp
+    .src(["dist", "public/templates"], {
+      read: false,
+      allowEmpty: true
+    })
+    .pipe(clean());
 });
 
-gulp.task("copy", function (done) {
-  return gulp.src(["public/**/*"]).pipe(gulp.dest("dist/"));
-});
+gulp.task(
+  "copy",
+  gulp.parallel(
+    function(done) {
+      return gulp.src(["public/**/*"]).pipe(gulp.dest("dist/"));
+    },
+    function(done) {
+      return gulp.src(["node_modules/gojs/**/*"]).pipe(gulp.dest("dist/gojs"));
+    },
+    function(done) {
+      return gulp.src(["locales/**/*"]).pipe(gulp.dest("dist/locales"));
+    }
+  )
+);
 
-gulp.task("copy-locales", function (done) {
-  return gulp.src(["locales/**/*"]).pipe(gulp.dest("dist/locales"));
-});
-
-gulp.task("uglify-js", function (done) {
+gulp.task("uglify-js", function(done) {
   return gulp
     .src("public/scripts/*.js")
     .pipe(uglify())
     .pipe(gulp.dest("dist/scripts"));
 });
 
-
-gulp.task("uglify-css", function (done) {
+gulp.task("uglify-css", function(done) {
   return gulp
     .src("public/stylesheets/*.css")
     .pipe(uglifyCss())
     .pipe(gulp.dest("dist/stylesheets"));
 });
 
-gulp.task("jade", function (done) {
-  var jadeFiles = [{
+gulp.task("jade", function(done) {
+  var jadeFiles = [
+    {
       src: "./views/index.jade",
       dest: "./dist/",
       locale: zhCN,
       locals: {
-        otherLocaleLink: '/en',
-        otherLocale: 'en'
+        otherLocaleLink: "/en",
+        otherLocale: "en"
       }
     },
     {
@@ -91,15 +101,15 @@ gulp.task("jade", function (done) {
     {
       src: "./views/templates/stats.jade",
       dest: "./dist/templates/en/",
-      locale: enUS,
+      locale: enUS
     },
     {
-      src: './views/index.jade',
-      dest: './dist/en/',
+      src: "./views/index.jade",
+      dest: "./dist/en/",
       locale: enUS,
       locals: {
-        otherLocaleLink: '/',
-        otherLocale: 'zh'
+        otherLocaleLink: "/",
+        otherLocale: "zh"
       }
     }
   ];
@@ -107,7 +117,7 @@ gulp.task("jade", function (done) {
   return runJade(jadeFiles)(done);
 });
 
-gulp.task("replace", function (done) {
+gulp.task("replace", function(done) {
   var replace = require("gulp-replace");
 
   gulp
@@ -119,30 +129,29 @@ gulp.task("replace", function (done) {
   done();
 });
 
-gulp.task("heroku", gulp.series(
-  "clean",
-  "replace",
-  "jade",
-  "copy",
-  "copy-locales",
-  "uglify-js",
-  "uglify-css"));
+gulp.task(
+  "heroku",
+  gulp.series("clean", "replace", "jade", "copy", "uglify-js", "uglify-css")
+);
 
 function runJade(jadeFiles) {
-  return gulp.parallel(...jadeFiles.map(jf => () => gulp
-    .src(jf.src)
-    .pipe(
-      jade({
-        locals: {
-          __: function (key) {
-            return jf.locale[key];
-          },
-          ...(jf.locals || {})
-        }
-      })
+  return gulp.parallel(
+    ...jadeFiles.map(jf => () =>
+      gulp
+        .src(jf.src)
+        .pipe(
+          jade({
+            locals: {
+              __: function(key) {
+                return jf.locale[key];
+              },
+              ...(jf.locals || {})
+            }
+          })
+        )
+        .pipe(gulp.dest(jf.dest))
     )
-    .pipe(gulp.dest(jf.dest))));
+  );
 }
-
 
 gulp.task("default", gulp.series("heroku", "start"));

@@ -261,10 +261,57 @@ angular
       });
 
       $scope.stats.showSplitDetail = {};
+
+      var $ = go.GraphObject.make;
+      var myDiagram = $(go.Diagram, "myDiagramDiv");
+
+      myDiagram.nodeTemplate = $(
+        go.Node,
+        "Auto", // the Shape will go around the TextBlock
+        $(
+          go.Shape,
+          "RoundedRectangle",
+          { strokeWidth: 0, fill: "white" }, // default fill is white
+          // Shape.fill is bound to Node.data.color
+          new go.Binding("fill", "color")
+        ),
+        $(
+          go.TextBlock,
+          { margin: 8 }, // some room around the text
+          // TextBlock.text is bound to Node.data.key
+          new go.Binding("text", "key")
+        )
+      );
+
+      // but use the default Link template, by not setting Diagram.linkTemplate
+
+      // create the model data that will be represented by Nodes and Links
+      myDiagram.model = new go.GraphLinksModel(
+        [
+          { key: "Alpha", color: "lightblue" },
+          { key: "Beta", color: "orange" },
+          { key: "Gamma", color: "lightgreen" },
+          { key: "Delta", color: "pink" }
+        ],
+        [
+          { from: "Alpha", to: "Beta" },
+          { from: "Alpha", to: "Gamma" },
+          { from: "Beta", to: "Beta" },
+          { from: "Gamma", to: "Delta" },
+          { from: "Delta", to: "Alpha" }
+        ]
+      );
+
+      var models = [];
+      var links = [];
+
       $scope.id3 = function() {
         var initialStats = $scope.stats;
         $scope.stats.showSplitDetail = $scope.stats.showSplitDetail || {};
         $scope.stats.showSplitDetail[initialStats.maxGainAttr] = true;
+        models.push({
+          key: initialStats.maxGainAttr
+        });
 
         var statsQueue = [initialStats];
 
@@ -290,6 +337,12 @@ angular
             var dataStats = getDataStats(data, theStats.maxGainAttr);
             s.stats = dataStats;
 
+            models.push({ key: dataStats.maxGainAttr });
+            links.push({
+              from: models[models.length - 2].key,
+              to: models[models.length - 1].key
+            });
+
             if (
               dataStats["决策"].entropy > 0 &&
               Object.values(dataStats.subGains).reduce(function(prev, next) {
@@ -300,6 +353,9 @@ angular
             }
           }
         }
+
+        console.log("stats = ", $scope.stats, models, links);
+        myDiagram.model = new go.GraphLinksModel(models, links);
       };
 
       var container = document.getElementById("data-table");
