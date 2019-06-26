@@ -302,15 +302,24 @@ angular
         ]
       );
 
-      var models = [];
-      var links = [];
-
       $scope.id3 = function() {
+        var models = [];
+        var links = [];
+
         var initialStats = $scope.stats;
         $scope.stats.showSplitDetail = $scope.stats.showSplitDetail || {};
         $scope.stats.showSplitDetail[initialStats.maxGainAttr] = true;
+
+        models.push({
+          key: "决策"
+        });
+
         models.push({
           key: initialStats.maxGainAttr
+        });
+        links.push({
+          from: models[models.length - 2].key,
+          to: initialStats.maxGainAttr
         });
 
         var statsQueue = [initialStats];
@@ -328,6 +337,9 @@ angular
           for (var c in theStats.subCategories[theStats.maxGainAttr]) {
             var s = theStats.subCategories[theStats.maxGainAttr][c];
 
+            models.push({ key: c });
+            links.push({ from: theStats.maxGainAttr, to: c });
+
             if (s.entropy <= 0) {
               continue;
             }
@@ -339,8 +351,8 @@ angular
 
             models.push({ key: dataStats.maxGainAttr });
             links.push({
-              from: models[models.length - 2].key,
-              to: models[models.length - 1].key
+              from: c,
+              to: dataStats.maxGainAttr
             });
 
             if (
