@@ -256,8 +256,10 @@ angular
 
       $scope.stats = {};
       $scope.$watch("testData", function(oldValue, newValue) {
-        console.log("hello");
+        console.log("testData updated");
         $scope.stats = getDataStats($scope.testData);
+
+        $scope.id3();
       });
 
       $scope.stats.showSplitDetail = {};
