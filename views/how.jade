@@ -176,7 +176,27 @@ body
         class: center, middle
 
         # https://id3.js.org
-    div
+
+        ---
+
+        class: left, middle
+
+        # 局限
+
+        - ID3 算法的实际上是在众多的决策树空间中，以信息增益最大为优先原则搜索决策树。
+        - 容易得到局部最优解
+
+        ---
+
+        class: left, middle
+
+        # 关于奥坎姆剃刀原则
+
+        ## 为什么我们偏爱于更短的决策树？
+
+        如果使用冗长的决策树来得到最终的决策，即使它很好地拟合了训练数据，但也可能是一种巧合造成的。 如果非常简短的决策树便能很好地拟合训练数据，那么这更加可能不是巧合，而是这几个关键属性与最终结果有着某种更强烈的联系。
+
+div
     script(src="/assets/scripts/remark.min.js")
     script(src="/lib/katex/dist/katex.min.js")
     script(src="/lib/katex/dist/contrib/auto-render.min.js")
