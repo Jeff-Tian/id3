@@ -8,12 +8,19 @@ html
         meta(name="description", content="#{__('在线可视化体验 ID3 分类算法.')}")
         title #{__('ID3 分类算法可视化')}
         link(rel="shortcut icon", href="/favicon.ico")
-        link(rel="stylesheet", type="text/css", href="/semantic/dist/semantic.min.css")
-        link(rel="stylesheet", type="text/css", href="/bower_components/handsontable/dist/handsontable.full.min.css")
         style(type="text/css").
-            @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-            @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+            @font-face {
+                font-family: 'Droid Serif';
+                src: url("/assets/fonts/DroidSerif.ttf");
+            }
+            @font-face {
+                font-family: 'Yanone Kaffeesatz';
+                src: url('/assets/fonts/Yanone_Kaffeesatz/YanoneKaffeesatz-Regular.ttf')
+            }
+            @font-face {
+                font-family: 'Ubuntu Mono';
+                src: url('/assets/fonts/Ubuntu_Mono/UbuntuMono-Regular.ttf')
+            }
 
             body {
                 font-family: 'Droid Serif';
@@ -32,7 +39,19 @@ body
     textarea#source.
         class: center, middle
 
-        # Title
+        # id3
+        ## 决策树构建算法介绍
+
+        ---
+
+        class: left, middle
+
+        background-image: url(/assets/images/Richard_Feynman_Nobel.jpg)
+        background-position: right bottom
+        background-size: contain
+
+        # [Richard Feynman](https://en.wikipedia.org/wiki/Richard_Feynman)
+        > 我不能创造的，我就并不理解。
 
         ---
 
@@ -46,6 +65,6 @@ body
 
         # Introduction
     div
-    script(src="https://remarkjs.com/downloads/remark-latest.min.js")
+    script(src="/assets/scripts/remark.min.js")
     script.
         var slideshow = remark.create();

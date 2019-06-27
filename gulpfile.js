@@ -64,6 +64,9 @@ gulp.task(
     },
     function(done) {
       return gulp.src(["locales/**/*"]).pipe(gulp.dest("dist/locales"));
+    },
+    () => {
+      return gulp.src(["assets/**/*"]).pipe(gulp.dest("dist/assets"));
     }
   )
 );
