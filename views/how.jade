@@ -1,3 +1,4 @@
+doctype html
 html
     head
         meta(charset="utf-8")
@@ -35,6 +36,22 @@ html
                 font-family: 'Ubuntu Mono';
             }
 
+            .inverse {
+                background: #272822;
+                color: #777872;
+                text-shadow: 0 0 20px #333;
+            }
+
+            .inverse h1, .inverse h2 {
+                color: #f3f3f3;
+                line-height: 0.8em;
+            }
+
+            .white { color: white; }
+
+            .footnote {position: absolute; bottom: 3em;}
+
+
 body
     textarea#source.
         class: center, middle
@@ -47,9 +64,77 @@ body
         background-image: url(/assets/images/decision-tree.jpg)
         background-position: center bottom
 
-        # 问题：
+        # 背景
 
         在做决策时，我们通常会考量多个因素。如果要将这个决策逻辑表达出来，我们很可能会采用画一个决策流程图的方式。这种决策流程图，因为结构上很类似一棵树，我们称它为决策树。
+
+        ---
+
+        background-image: url(/assets/images/data.png)
+        background-position: center bottom
+        background-size: 80%
+
+        # 问题
+
+        给定一组训练数据集和决策结果，如何让计算机学会画决策树？
+
+        ---
+
+        class: center, middle
+
+        # 难点
+
+        - 属性众多，该先选哪个，再选哪个？
+
+        ---
+
+        # 启示
+
+        - 优先选择给我们信息量更大的属性
+
+        # 问题
+
+        - 怎么衡量和计算每个属性的信息量？
+
+        ---
+
+        background-image: url(/assets/images/k8s_is_simple.jpeg)
+        background-position: center bottom
+        background-size: cover
+
+        class: left bottom
+
+        # .white[呼唤天才]
+
+        .white[信息量的计算非常简单，只是需要一个天才来理解信息量而已。]
+
+        ---
+
+        class: left, top
+
+        background-image: url(/assets/images/ClaudeShannon_MFO3807.jpg)
+        background-position: right bottom
+        background-size: contain
+
+        # 什么是信息？
+
+        信息是用来消除随机不确定性的东西。
+        .right.white[—— 香农]
+
+        .footnote[By Jacobs, Konrad - <a rel="nofollow" class="external free" href="https://opc.mfo.de/detail?photo_id=3807">https://opc.mfo.de/detail?photo_id=3807</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/de/deed.en" title="Creative Commons Attribution-Share Alike 2.0 de">CC BY-SA 2.0 de</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=45380422">Link</a>]
+        ---
+
+        class: center, middle
+
+        # 信息熵
+
+        $$H=-\sum_{i} p_i log_2(p_i)$$
+
+        ---
+
+        # 对于二元分类的例子
+
+        $$H=-p\_\oplus log\_2(p\_\oplus)-p\_\ominus log\_2(p\_\ominus)$$
 
         ---
 
@@ -76,5 +161,20 @@ body
         # Introduction
     div
     script(src="/assets/scripts/remark.min.js")
+    script(src="/lib/katex/dist/katex.min.js")
+    script(src="/lib/katex/dist/contrib/auto-render.min.js")
+    link(rel="stylesheet", href="/lib/katex/dist/katex.min.css")
     script.
-        var slideshow = remark.create();
+        var options = {};
+        var renderMath = function() {
+            renderMathInElement(document.body);
+            // or if you want to use $...$ for math,
+            // renderMathInElement(document.body, {delimiters: [ // mind the order of delimiters(!?)
+            //     {left: "$$", right: "$$", display: true},
+            //     {left: "$", right: "$", display: false},
+            //     {left: "\\[", right: "\\]", display: true},
+            //     {left: "\\(", right: "\\)", display: false},
+            // ]});
+        }
+
+        var slideshow = remark.create(options, renderMath);

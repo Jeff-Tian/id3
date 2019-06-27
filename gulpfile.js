@@ -62,6 +62,11 @@ gulp.task(
     function(done) {
       return gulp.src(["node_modules/gojs/**/*"]).pipe(gulp.dest("dist/gojs"));
     },
+    () => {
+      return gulp
+        .src(["node_modules/katex/**/*"])
+        .pipe(gulp.dest("dist/lib/katex"));
+    },
     function(done) {
       return gulp.src(["locales/**/*"]).pipe(gulp.dest("dist/locales"));
     },
