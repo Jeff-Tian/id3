@@ -1,7 +1,7 @@
 {
   "Test i18n": "Test i18n",
   "id3 算法可视化": "id3 algorithm Visualization",
-  "在线可视化体验 id3 决策树算法。": "id3 classification Visualization, play and learn id3 classification algorithm online.",
+  "在线可视化体验 id3 决策树算法。": "id3 classification Visualization, play and learn id3 classification algorithm and use it to build the decision tree online.",
   "叽歪": "ZiZhuJY",
   "切换语言": "Switch Language",
   "中心点个数 k": "# of centroids K",
@@ -36,5 +36,6 @@
   "数据拆分分布": "Data Split Distribution",
   "Gain": "Gain",
   "enjoySports": "Enjoy Sports Classical Example",
-  "AI 三子棋": "Tic Tac Toe AI"
+  "AI 三子棋": "Tic Tac Toe AI",
+  "how": "How"
 }
