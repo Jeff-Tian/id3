@@ -1,0 +1,51 @@
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width")
+        meta(name="apple-mobile-web-app-capable", content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style", content="black")
+        meta(http-quiv="X-UA-Compatible", content="IE=edge,chrome=1")
+        meta(name="description", content="#{__('在线可视化体验 ID3 分类算法.')}")
+        title #{__('ID3 分类算法可视化')}
+        link(rel="shortcut icon", href="/favicon.ico")
+        link(rel="stylesheet", type="text/css", href="/semantic/dist/semantic.min.css")
+        link(rel="stylesheet", type="text/css", href="/bower_components/handsontable/dist/handsontable.full.min.css")
+        style(type="text/css").
+            @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+            @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+            body {
+                font-family: 'Droid Serif';
+            }
+
+            h1, h2, h3 {
+                font-family: 'Yanone Kaffeesatz';
+                font-weight: normal;
+            }
+
+            .remark-code, .remark-inline-code {
+                font-family: 'Ubuntu Mono';
+            }
+
+body
+    textarea#source.
+        class: center, middle
+
+        # Title
+
+        ---
+
+        # Agenda
+
+        1. Introduction
+        2. Deep-dive
+        3. ...
+
+        ---
+
+        # Introduction
+    div
+    script(src="https://remarkjs.com/downloads/remark-latest.min.js")
+    script.
+        var slideshow = remark.create();

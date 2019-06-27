@@ -3,8 +3,8 @@ var jshint = require("gulp-jshint");
 var sh = require("shelljs");
 var karma = require("karma").server;
 var bump = require("gulp-bump");
-var print = require("gulp-print"),
-  uglify = require("gulp-uglify"),
+require("gulp-print");
+var uglify = require("gulp-uglify"),
   clean = require("gulp-clean"),
   uglifyCss = require("gulp-minify-css"),
   jade = require("gulp-jade");
@@ -107,6 +107,15 @@ gulp.task("jade", function(done) {
       src: "./views/index.jade",
       dest: "./dist/en/",
       locale: enUS,
+      locals: {
+        otherLocaleLink: "/",
+        otherLocale: "zh"
+      }
+    },
+    {
+      src: "./views/how.jade",
+      dest: "./dist/",
+      locale: zhCN,
       locals: {
         otherLocaleLink: "/",
         otherLocale: "zh"
