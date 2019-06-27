@@ -132,9 +132,33 @@ body
 
         ---
 
+        class: left, top
+
+        background-image: url(/assets/images/data.png), url(/assets/images/800px-Binary_entropy_plot.svg.png)
+        background-position: left bottom, right bottom
+        background-size: 50%, 35%
+
         # 对于二元分类的例子
 
         $$H=-p\_\oplus log\_2(p\_\oplus)-p\_\ominus log\_2(p\_\ominus)$$
+
+        |Total | Yes | No |
+        | ---- | --- | -- |
+        | 14   | 9   | 5  |
+
+        $$H=-\frac{5}{14} log\_2(\frac{5}{14}) - \frac{9}{14} log\_2(\frac{9}{14})=0.9402859586706309$$
+
+        ---
+
+        class: left, top
+
+        # 信息增益
+
+        信息增益 = 熵（前）-熵（后）
+
+        $$Gain(D, A) = H(D) - H(D|A)$$
+
+        **做法**：计算使用所有特征划分数据集D，得到多个特征划分数据集D的信息增益，从这些信息增益中选择最大的，因而当前结点的划分特征便是使信息增益最大的划分所使用的特征。
 
         ---
 
@@ -149,16 +173,9 @@ body
 
         ---
 
+        class: center, middle
 
-        # Agenda
-
-        1. Introduction
-        2. Deep-dive
-        3. ...
-
-        ---
-
-        # Introduction
+        # https://id3.js.org
     div
     script(src="/assets/scripts/remark.min.js")
     script(src="/lib/katex/dist/katex.min.js")
