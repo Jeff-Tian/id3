@@ -263,7 +263,11 @@ angular
       $scope.stats.showSplitDetail = {};
 
       var $ = go.GraphObject.make;
-      var myDiagram = $(go.Diagram, "myDiagramDiv");
+      var myDiagram = $(go.Diagram, "myDiagramDiv", {
+        initialAutoScale: go.Diagram.UniformToFill,
+        layout: $(go.TreeLayout, { comparer: go.LayoutVertex.smartComparer }) // have the comparer sort by numbers as well as letters
+        // other properties are set by the layout function, defined below
+      });
 
       myDiagram.nodeTemplate = $(
         go.Node,
@@ -341,6 +345,17 @@ angular
             links.push({ from: theStats.maxGainAttr, to: c });
 
             if (s.entropy <= 0) {
+              var key = Object.entries(s.set)[0][0];
+
+              if (
+                models.filter(function(m) {
+                  return m.key === key;
+                }).length <= 0
+              ) {
+                models.push({ key: key });
+              }
+              links.push({ from: c, to: key });
+
               continue;
             }
 
