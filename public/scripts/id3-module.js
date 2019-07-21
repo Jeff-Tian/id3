@@ -8,7 +8,7 @@ angular
   .config([
     "$translateProvider",
     "localeHelperProvider",
-    function($translateProvider, localeHelperProvider) {
+    function ($translateProvider, localeHelperProvider) {
       $translateProvider.useLoader("translationLoader");
       var locale = localeHelperProvider.getLocale(window.location.pathname);
       $translateProvider.preferredLanguage(locale);
@@ -21,8 +21,8 @@ angular
     "$http",
     "$q",
     "$rootScope",
-    function($http, $q, $rootScope) {
-      return function(options) {
+    function ($http, $q, $rootScope) {
+      return function (options) {
         var dfd = $q.defer();
 
         // Filled by grunt
@@ -37,7 +37,7 @@ angular
         $http({
           method: "GET",
           url: "/locales/" + options.key + ".json"
-        }).then(function(result) {
+        }).then(function (result) {
           dfd.resolve(result);
 
           console.log("localeResource:load");
@@ -49,14 +49,14 @@ angular
     }
   ])
   .directive("tree", [
-    function() {
+    function () {
       if (window.locale === "en") {
         return {
           templateUrl: "/templates/en/stats.html",
           scope: {
             stats: "="
           },
-          link: function(scope, element, attrs) {}
+          link: function (scope, element, attrs) { }
         };
       }
 
@@ -65,7 +65,7 @@ angular
         scope: {
           stats: "="
         },
-        link: function(scope, element, attrs) {}
+        link: function (scope, element, attrs) { }
       };
     }
   ])
@@ -74,124 +74,124 @@ angular
     "id3",
     "$filter",
     "$q",
-    function($scope, id3, $filter, $q) {
+    function ($scope, id3, $filter, $q) {
       $scope.testData =
         location.search.indexOf("enjoySports") >= 0
           ? [
-              {
-                Sky: "Sunny",
-                AirTemp: "Warm",
-                Humidity: "Normal",
-                Wind: "Strong",
-                Water: "Warm",
-                Forecast: "Same",
-                决策: "Yes"
-              },
-              {
-                Sky: "Sunny",
-                AirTemp: "Warm",
-                Humidity: "High",
-                Wind: "Strong",
-                Water: "Warm",
-                Forecast: "Same",
-                决策: "Yes"
-              },
-              {
-                Sky: "Rainy",
-                AirTemp: "Cold",
-                Humidity: "High",
-                Wind: "Strong",
-                Water: "Warm",
-                Forecast: "Change",
-                决策: "No"
-              },
-              {
-                Sky: "Sunny",
-                AirTemp: "Warm",
-                Humidity: "High",
-                Wind: "Strong",
-                Water: "Cool",
-                Forecast: "Change",
-                决策: "Yes"
-              },
-              {
-                Sky: "Sunny",
-                AirTemp: "Warm",
-                Humidity: "Normal",
-                Wind: "Weak",
-                Water: "Warm",
-                Forecast: "Same",
-                决策: "No"
-              }
-            ]
+            {
+              Sky: "Sunny",
+              AirTemp: "Warm",
+              Humidity: "Normal",
+              Wind: "Strong",
+              Water: "Warm",
+              Forecast: "Same",
+              决策: "Yes"
+            },
+            {
+              Sky: "Sunny",
+              AirTemp: "Warm",
+              Humidity: "High",
+              Wind: "Strong",
+              Water: "Warm",
+              Forecast: "Same",
+              决策: "Yes"
+            },
+            {
+              Sky: "Rainy",
+              AirTemp: "Cold",
+              Humidity: "High",
+              Wind: "Strong",
+              Water: "Warm",
+              Forecast: "Change",
+              决策: "No"
+            },
+            {
+              Sky: "Sunny",
+              AirTemp: "Warm",
+              Humidity: "High",
+              Wind: "Strong",
+              Water: "Cool",
+              Forecast: "Change",
+              决策: "Yes"
+            },
+            {
+              Sky: "Sunny",
+              AirTemp: "Warm",
+              Humidity: "Normal",
+              Wind: "Weak",
+              Water: "Warm",
+              Forecast: "Same",
+              决策: "No"
+            }
+          ]
           : [
-              {
-                GMAT: 650,
-                GPA: 2.75,
-                "GMAT 定量评分": 35,
-                决策: "No"
-              },
-              {
-                GMAT: 580,
-                GPA: 3.5,
-                "GMAT 定量评分": 70,
-                决策: "No"
-              },
-              {
-                GMAT: 600,
-                GPA: 3.5,
-                "GMAT 定量评分": 75,
-                决策: "Yes"
-              },
-              {
-                GMAT: 450,
-                GPA: 2.95,
-                "GMAT 定量评分": 80,
-                决策: "No"
-              },
-              {
-                GMAT: 700,
-                GPA: 3.25,
-                "GMAT 定量评分": 90,
-                决策: "Yes"
-              },
-              {
-                GMAT: 590,
-                GPA: 3.5,
-                "GMAT 定量评分": 80,
-                决策: "Yes"
-              },
-              {
-                GMAT: 400,
-                GPA: 3.85,
-                "GMAT 定量评分": 45,
-                决策: "No"
-              },
-              {
-                GMAT: 640,
-                GPA: 3.5,
-                "GMAT 定量评分": 75,
-                决策: "Yes"
-              },
-              {
-                GMAT: 540,
-                GPA: 3.0,
-                "GMAT 定量评分": 60,
-                决策: "?"
-              },
-              {
-                GMAT: 690,
-                GPA: 2.85,
-                "GMAT 定量评分": 80,
-                决策: "?"
-              },
-              {
-                GMAT: 490,
-                GPA: 4.0,
-                "GMAT 定量评分": 65,
-                决策: "?"
-              }
-            ];
+            {
+              GMAT: 650,
+              GPA: 2.75,
+              "GMAT 定量评分": 35,
+              决策: "No"
+            },
+            {
+              GMAT: 580,
+              GPA: 3.5,
+              "GMAT 定量评分": 70,
+              决策: "No"
+            },
+            {
+              GMAT: 600,
+              GPA: 3.5,
+              "GMAT 定量评分": 75,
+              决策: "Yes"
+            },
+            {
+              GMAT: 450,
+              GPA: 2.95,
+              "GMAT 定量评分": 80,
+              决策: "No"
+            },
+            {
+              GMAT: 700,
+              GPA: 3.25,
+              "GMAT 定量评分": 90,
+              决策: "Yes"
+            },
+            {
+              GMAT: 590,
+              GPA: 3.5,
+              "GMAT 定量评分": 80,
+              决策: "Yes"
+            },
+            {
+              GMAT: 400,
+              GPA: 3.85,
+              "GMAT 定量评分": 45,
+              决策: "No"
+            },
+            {
+              GMAT: 640,
+              GPA: 3.5,
+              "GMAT 定量评分": 75,
+              决策: "Yes"
+            },
+            {
+              GMAT: 540,
+              GPA: 3.0,
+              "GMAT 定量评分": 60,
+              决策: "?"
+            },
+            {
+              GMAT: 690,
+              GPA: 2.85,
+              "GMAT 定量评分": 80,
+              决策: "?"
+            },
+            {
+              GMAT: 490,
+              GPA: 4.0,
+              "GMAT 定量评分": 65,
+              决策: "?"
+            }
+          ];
 
       function distribute(data, stats) {
         var total = 0;
@@ -255,7 +255,7 @@ angular
       $scope.gain = id3.gain;
 
       $scope.stats = {};
-      $scope.$watch("testData", function(oldValue, newValue) {
+      $scope.$watch("testData", function (oldValue, newValue) {
         console.log("testData updated");
         $scope.stats = getDataStats($scope.testData);
 
@@ -308,7 +308,7 @@ angular
         ]
       );
 
-      $scope.id3 = function() {
+      $scope.id3 = function () {
         var models = [];
         var links = [];
 
@@ -350,7 +350,7 @@ angular
               var key = Object.entries(s.set)[0][0];
 
               if (
-                models.filter(function(m) {
+                models.filter(function (m) {
                   return m.key === key;
                 }).length <= 0
               ) {
@@ -374,7 +374,7 @@ angular
 
             if (
               dataStats["决策"].entropy > 0 &&
-              Object.values(dataStats.subGains).reduce(function(prev, next) {
+              Object.values(dataStats.subGains).reduce(function (prev, next) {
                 return prev + next;
               }, 0) > 0
             ) {
@@ -383,20 +383,37 @@ angular
           }
         }
 
-        console.log("stats = ", $scope.stats, models, links);
         myDiagram.model = new go.GraphLinksModel(models, links);
       };
+
+      function negativeValueRenderer(instance, td, row, prop, value, cellProps) {
+        Handsontable.TextCell.renderer.apply(this, arguments);
+
+        console.log('value = ', value)
+        if (value.startsWith('=')) {
+          td.style.background = 'red';
+        }
+      }
+
+      Handsontable.renderers.registerRenderer('negativeValueRenderer', negativeValueRenderer);
 
       var container = document.getElementById("data-table");
       var hot = new Handsontable(container, {
         data: id3.mapObjectArrayToArrayArray($scope.testData),
         colHeaders: true,
         rowHeaders: true,
+        manualColumnResize: true,
+        formulas: true,
+        cells: function (row, col, prop) {
+          const cellProps = {};
+          cellProps.renderer = "negativeValueRenderer";
+          return cellProps;
+        },
         contextMenu: {
-          callback: function() {
+          callback: function () {
             $scope.testData = id3.mapArrayArrayToObjectArray(
-              this.getData().filter(function(a) {
-                return a.reduce(function(prev, next) {
+              this.getData().filter(function (a) {
+                return a.reduce(function (prev, next) {
                   return prev && next !== null;
                 }, true);
               })
@@ -409,11 +426,11 @@ angular
         Controller: true,
         minSpareRows: 1,
         enterBeginsEditing: false,
-        beforeChange: function(changes, source) {},
-        afterChange: function() {
+        beforeChange: function (changes, source) { },
+        afterChange: function () {
           $scope.testData = id3.mapArrayArrayToObjectArray(
-            this.getData().filter(function(a) {
-              return a.reduce(function(prev, next) {
+            this.getData().filter(function (a) {
+              return a.reduce(function (prev, next) {
                 return prev && next !== null;
               }, true);
             })
