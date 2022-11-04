@@ -30,7 +30,7 @@
     "jade": "1.11.0",
     "katex": "^0.10.2",
     "pug": "^2.0.0-alpha3",
-    "semantic-ui": "^2.1.8"
+    "semantic-ui": "^2.5.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
