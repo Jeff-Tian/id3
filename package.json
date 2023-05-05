@@ -1,11 +1,12 @@
 {
   "name": "id3",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Online demo for id3 classification process: http://id3.jijiyy.me",
   "main": "app.js",
   "scripts": {
     "test": "gulp mocha && gulp test",
-    "start": "gulp"
+    "start": "gulp",
+    "bower-install": "bower install"
   },
   "repository": {
     "type": "git",

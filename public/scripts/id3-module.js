@@ -390,7 +390,7 @@ angular
         Handsontable.TextCell.renderer.apply(this, arguments);
 
         console.log('value = ', value)
-        if (value.startsWith('=')) {
+        if (String(value).startsWith('=')) {
           td.style.background = 'red';
         }
       }

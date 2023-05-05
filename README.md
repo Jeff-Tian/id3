@@ -8,10 +8,10 @@
 ## Run on local machine
 
 ```shell
-npm install
-bower install
+yarn
+yarn bower-install
 
-npm start
+yarn start
 ```
 
 Open browser and navigate to: http://localhost:60005/
@@ -26,5 +26,5 @@ This repo welcomes all kinds of issues and Pull Request. For submitting PR, plea
 included and all the tests are passed:
 
 ```shell
-npm test
+yarn test
 ```
