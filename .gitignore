@@ -38,3 +38,5 @@ public/bower_components
 
 dist/bower_components
 dist
+
+.env.local

@@ -1,7 +1,7 @@
 var gulp = require("gulp");
 var jshint = require("gulp-jshint");
 var sh = require("shelljs");
-var karma = require("karma").server;
+var karma = require("karma");
 var bump = require("gulp-bump");
 require("gulp-print");
 var uglify = require("gulp-uglify"),
@@ -28,13 +28,15 @@ gulp.task("start", function(done) {
 });
 
 gulp.task("test", function(done) {
-  karma.start(
+  var server = new karma.Server(
     {
       configFile: __dirname + "/tests/karma.conf.js",
       singleRun: true
     },
     done
   );
+
+  server.start();
 });
 
 gulp.task("bump", function() {
@@ -138,10 +140,10 @@ gulp.task("replace", function(done) {
   var replace = require("gulp-replace");
 
   gulp
-    .src(["public/semantic/dist/semantic.min.css"])
+    .src(["public/bower_components/semantic/dist/semantic.min.css"])
     //.pipe(replace(/https:\/\/fonts.googleapis.com\/css/g, 'http://fonts.useso.com/css'))
     .pipe(replace(/https:\/\/fonts.googleapis.com\/css/g, ""))
-    .pipe(gulp.dest("public/semantic/dist/"));
+    .pipe(gulp.dest("public/bower_components/semantic/dist/"));
 
   done();
 });
