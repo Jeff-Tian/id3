@@ -34,6 +34,7 @@
     "pug": "^2.0.0-alpha3"
   },
   "devDependencies": {
+    "bower": "^1.8.14",
     "gulp": "^4.0.2",
     "gulp-bump": "^2.1.0",
     "gulp-clean": "^0.3.2",
