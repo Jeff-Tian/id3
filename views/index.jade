@@ -43,6 +43,16 @@ html
                 height: 100%;
             }
 
+        <!-- Google tag (gtag.js) -->
+        script(async, src="https://www.googletagmanager.com/gtag/js?id=UA-4867336-3")
+        script.
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-4867336-3');
+
+
 body
     div(ng-app="id3Module", ng-controller="ID3Ctrl")
         include partial/nav
