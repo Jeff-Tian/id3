@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta http-quiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="description" content="在线可视化体验 ID3 分类算法."><title>ID3 分类算法可视化</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.min.css"><link rel="stylesheet" type="text/css" href="/bower_components/handsontable/dist/handsontable.full.min.css"><style type="text/css">.cmd {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #202020;
+    border: 4px solid silver;
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px #6e6e6e;
+    color: #e2e2e2;
+    display: block;
+    font: 1em 'andale mono', 'lucida console', monospace;
+    line-height: 1em;
+    overflow: auto;
+    padding: 15px;
+}
+
+.auto-wrap {
+    word-wrap: normal;
+    white-space: pre-wrap;
+}
+
+.hard.auto-wrap {
+    word-wrap: break-word;
+}
+
+#myDiagramDiv {
+    min-height: 520px;
+    background-color: #6e6e6e;
+    width: 100%;
+    height: 100%;
+}
+</style><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-4867336-3"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-4867336-3');
+
+</script></head></html><body><div ng-app="id3Module" ng-controller="ID3Ctrl"><div class="ui purple inverted menu"><a href="/?gmat" class="active item"><i class="users icon"></i>id3 算法可视化</a><a href="/?enjoySports" class="item"><i class="baseball ball icon"></i>Enjoy Sports 经典案例</a><a href="/?weather" class="item"><i class="rain icon"></i>天气数据集</a><a href="https://zhuanlan.zhihu.com/p/629157176" class="item"><i class="book icon"></i>原理</a><a href="/how.html" class="item"><i class="question circle icon"></i>演示文稿</a><a href="https://github.com/Jeff-Tian/id3" target="_blank" class="item"><i class="github alternate icon"></i>源代码</a><a href="//tictactoe.js.org" target="_blank" class="item"><i class="square full icon"></i>AI 三子棋</a><a href="//gitmoji.js.org" target="_blank" class="item"><i class="smile icon"></i>gitmoji</a><div class="right menu"><a href="/en" class="item"><i class="world icon"></i>English</a></div></div><div style="height: 80%; margin-bottom: 50px;" class="ui one column grid"><div class="ui column"><h5>&nbsp;使用 ID3 算法构建决策树</h5><div id="myDiagramDiv" class="hard auto-wrap cmd"></div></div></div><div class="ui two column grid"><div class="ui column"><div class="hard auto-wrap cmd"><table class="ui inverted purple table"><caption>数据分布</caption><thead><tr><th ng-repeat="(class, count) in stats['决策'].set">{{class}}</th><th>#</th></tr></thead><tbody><tr><td ng-repeat="(class, count) in stats['决策'].set">{{count}}</td><td>{{stats['决策'].sum}}</td></tr></tbody></table><p>Entropy: {{stats['决策'].entropy}}</p><table ng-show="false" class="ui selectable inverted table"><thead><tr><th>Attribute</th><th>Range</th></tr></thead><tbody><tr ng-repeat="(attr, r) in stats.range"><td>{{attr}}</td><td>{{r}}</td></tr></tbody></table><table ng-show="false" class="ui selectable inverted table"><thead><tr><th>Attribute</th><th>Category</th></tr></thead><tbody><tr ng-repeat="(attr, c) in stats.categories"><td>{{attr}}</td><td>{{c}}</td></tr></tbody></table><table ng-repeat="(attr, r) in stats.range" ng-if="attr !== '决策'" class="ui selectable inverted table"><caption style="cursor: pointer;" ng-click="stats.showSplitDetail[attr] = !stats.showSplitDetail[attr]" ng-class="{'red': stats.maxGainAttr === attr}" class="ui inverted sub header">Split by {{attr}} (Gain = {{stats.subGains[attr]}})</caption><thead ng-show="stats.showSplitDetail[attr]"><tr><th>~</th><th>数据拆分分布</th></tr></thead><tbody ng-show="stats.showSplitDetail[attr]"><tr ng-repeat="(range, distribute) in stats.subCategories[attr]"><td><p>{{range}}</p></td><td><table class="ui inverted purple table"><caption>数据分布</caption><thead><tr><th ng-repeat="(class, count) in distribute.set">{{class}}</th><th>#</th></tr></thead><tbody><tr><td ng-repeat="(class, count) in distribute.set">{{count}}</td><td>{{distribute.sum}}</td></tr></tbody></table><p>Entropy: {{distribute.entropy}}</p><tree stats="distribute.stats" ng-if="distribute.stats"></tree></td></tr></tbody><tfoot ng-show="stats.showSplitDetail[attr]"><tr><th> Gain</th><th>{{stats.subGains[attr]}}</th></tr></tfoot></table><!--tree--></div></div><div class="ui column"><form name="controlForm" ng-submit="id3()" ng-class="{'loading': computing}" class="ui form"><div class="inline field"></div><div class="field"><button type="submit" ng-click="id3()" class="ui button">开始构建决策树</button></div><div><h5>数据:</h5><div id="data-table"></div></div></form></div></div><div class="ui inverted segment"><div class="ui inverted secondary menu"><a href="https://github.com/Jeff-Tian/id3/actions/workflows/ci.yml" target="_blank" rel="noopener noreferer" class="item"><i class="dashboard icon"></i>编译状态</a><a href="https://willkurt.github.io/ID3-Decision-Tree/" target="_blank" rel="noopener noreferer" class="item">使用 id3 算法构建的三子棋决策树</a></div></div></div><div><script src="/bower_components/jquery/dist/jquery.min.js"></script><script src="/semantic/dist/semantic.min.js"></script><script src="/bower_components/angular/angular.min.js"></script><script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script><script src="/bower_components/angular-translate/angular-translate.min.js"></script><script src="/locales/index.js"></script><script src="/scripts/virtual-js/id3-math.js"></script><script src="/scripts/id3-module.js?nonce=abc"></script><script src="/bower_components/handsontable/dist/handsontable.full.min.js"></script><script src="/gojs/release/go-debug.js"></script><script type="text/javascript"></script></div></body>
