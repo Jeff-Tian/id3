@@ -23,10 +23,10 @@
   },
   "homepage": "https://github.com/Jeff-Tian/id3#readme",
   "dependencies": {
-    "body-parser": "^1.15.0",
+    "body-parser": "^1.20.3",
     "connect-busboy": "0.0.2",
     "entropy-ts": "^0.1.0",
-    "express": "^4.17.3",
+    "express": "^4.20.0",
     "gojs": "^2.0.13",
     "i18n": "^0.8.4",
     "jade": "1.11.0",
